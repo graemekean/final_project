@@ -1,0 +1,69 @@
+<%= form_for(@session) do |f| %>
+  <% if @session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@session.errors.count, "error") %> prohibited this session from being saved:</h2>
+
+      <ul>
+      <% @session.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :bpm %><br>
+    <%= f.text_field :bpm %>
+  </div>
+  <div class="field">
+    <%= f.label :key %><br>
+    <%= f.text_field :key %>
+  </div>
+  <div class="field">
+    <%= f.label :creator %><br>
+    <%= f.text_field :creator %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.text_field :genre %>
+  </div>
+  <div class="field">
+    <%= f.label :public %><br>
+    <%= f.check_box :public %>
+  </div>
+  <div class="field">
+    <%= f.label :editable %><br>
+    <%= f.check_box :editable %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :created_at %><br>
+    <%= f.datetime_select :created_at %>
+  </div>
+  <div class="field">
+    <%= f.label :published %><br>
+    <%= f.check_box :published %>
+  </div>
+  <div class="field">
+    <%= f.label :published_at %><br>
+    <%= f.datetime_select :published_at %>
+  </div>
+  <div class="field">
+    <%= f.label :preview_url %><br>
+    <%= f.text_field :preview_url %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

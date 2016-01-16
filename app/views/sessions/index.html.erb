@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Sessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Bpm</th>
+      <th>Key</th>
+      <th>Creator</th>
+      <th>Genre</th>
+      <th>Public</th>
+      <th>Editable</th>
+      <th>Description</th>
+      <th>Created at</th>
+      <th>Published</th>
+      <th>Published at</th>
+      <th>Preview url</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.title %></td>
+        <td><%= session.bpm %></td>
+        <td><%= session.key %></td>
+        <td><%= session.creator %></td>
+        <td><%= session.genre %></td>
+        <td><%= session.public %></td>
+        <td><%= session.editable %></td>
+        <td><%= session.description %></td>
+        <td><%= session.created_at %></td>
+        <td><%= session.published %></td>
+        <td><%= session.published_at %></td>
+        <td><%= session.preview_url %></td>
+        <td><%= session.user_id %></td>
+        <td><%= link_to 'Show', session %></td>
+        <td><%= link_to 'Edit', edit_session_path(session) %></td>
+        <td><%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Session', new_session_path %>

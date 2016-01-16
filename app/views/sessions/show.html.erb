@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @session.title %>
+</p>
+
+<p>
+  <strong>Bpm:</strong>
+  <%= @session.bpm %>
+</p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @session.key %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @session.creator %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @session.genre %>
+</p>
+
+<p>
+  <strong>Public:</strong>
+  <%= @session.public %>
+</p>
+
+<p>
+  <strong>Editable:</strong>
+  <%= @session.editable %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @session.description %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @session.created_at %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @session.published %>
+</p>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @session.published_at %>
+</p>
+
+<p>
+  <strong>Preview url:</strong>
+  <%= @session.preview_url %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @session.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_session_path(@session) %> |
+<%= link_to 'Back', sessions_path %>
