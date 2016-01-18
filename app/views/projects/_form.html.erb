@@ -1,0 +1,56 @@
+<%= simple_form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.input :title %>
+  </div>
+  <div class="field">
+    <%= f.input :bpm %>
+  </div>
+  <div class="field">
+    <%= f.input :key %>
+  </div>
+  <div class="field">
+    <%= f.input :creator %>
+  </div>
+  <div class="field">
+    <%= f.input :genre %>
+  </div>
+  <div class="field">
+    <%= f.input :public %>
+  </div>
+  <div class="field">
+    <%= f.input :editable %>
+  </div>
+  <div class="field">
+    <%= f.input :description %>
+  </div>
+  <div class="field">
+    <%= f.input :created_at %>
+  </div>
+  <div class="field">
+    <%= f.input :published %>
+  </div>
+  <div class="field">
+    <%= f.input :published_at %>
+  </div>
+  <div class="field">
+    <%= f.input :preview_url %>
+  </div>
+  <div class="field">
+    <%= f.input :user_id, collection: User.all, label_method: :profile_name %>
+  </div>
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
