@@ -1,8 +1,60 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :projects
+  
+  get 'statuses/index'
 
-  root to: 'projects#index'
+  get 'statuses/show'
+
+  get 'statuses/edit'
+
+  # get 'status/index'
+
+  # get 'status/show'
+
+  # get 'stem/index'
+
+  # get 'stem/show'
+
+  # get 'stem/edit'
+
+  devise_for :users
+
+  devise_scope :user do
+    get 'register', to: 'devise/registrations#new', as: :register
+    get 'login', to: 'devise/sessions#new', as: :login
+    get 'logout', to: 'devise/sessions#destroy', as: :logout
+  end
+
+  resources :projects
+  resources :profile
+  resources :statuses
+  resources :friendships
+  resources :stems
+  resources :studios
+
+  # get 'studios/index'
+  # post 'studios/new'
+
+
+  # get 'feed', to: 'statuses#index', as: :feed
+  get '/:id', to: 'profile#show'
+  # get '/:id', to: 'profile#edit'
+
+
+  root to: 'statuses#index'
+
+  # get 'stem/index'
+  # get 'stem/show'
+  # get 'stem/edit'
+  # get 'stem/delete'
+
+ 
+
+  get 'profiles/show'
+
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

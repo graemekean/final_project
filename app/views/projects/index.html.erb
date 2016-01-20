@@ -9,7 +9,7 @@
 <% @projects.each do |project| %>
 <div class="session-full">
   <strong><%= project.title %></strong>
-  <p>Name: <%= project.user.first_name %></p>
+  <p>Name: <%= current_user.email %></p>
   <p><%= project.description %></p>
 
   <%= link_to time_ago_in_words(project.created_at) + " ago", project %> | 

@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118142658) do
+ActiveRecord::Schema.define(version: 20160120133123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "profile_name"
+    t.string   "youtube_url"
+    t.string   "profile_image"
+    t.string   "profile_video"
+    t.string   "about_me"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -31,6 +53,33 @@ ActiveRecord::Schema.define(version: 20160118142658) do
     t.string   "preview_url"
     t.integer  "user_id"
     t.datetime "updated_at",   null: false
+    t.integer  "studio_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stems", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.string   "description"
+    t.string   "key"
+    t.decimal  "bpm"
+    t.string   "instrument"
+    t.datetime "date_created"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "studios", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -4,6 +4,8 @@ class ProjectsController < ApplicationController
   # GET /sessions
   # GET /sessions.json
   def index
+    @user = current_user
+
     @projects = Project.all
   end
 
