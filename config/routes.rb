@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :statuses
   resources :friendships
   resources :stems
-  # resources :studio
+  resources :studio
 
   # get 'studios/index'
   # post 'studios/new'
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
   # get 'feed', to: 'statuses#index', as: :feed
   # get '/:id', to: 'profile#show', as: 'profile'
-  get 'studio/show'
+  # get 'studio/show'
 
   # get 'profile/show'
 
