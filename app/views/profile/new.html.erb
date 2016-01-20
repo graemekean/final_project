@@ -1,5 +1,44 @@
-<h1>New Profile</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', projects_path %>
+<div class="container edit_user">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% provide(:title, "Edit user Profile") %>
+    <h1>Update your profile</h1>
+
+
+    <%= simple_form_for(@profile) do |f| %>
+    <%#= render 'shared/error_messages' %>
+    <div class="col-md-6">
+
+      <%= f.input :first_name %>
+      <br>
+      <%= f.input :last_name %>
+      <br>
+      <%= f.label :profile_name %>    
+      <br>  
+      <%= f.label :profile_image %>
+      <%= f.hidden_field :user_id, :value => current_user.id %> 
+     
+
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :about_me %>
+      <%= f.text_field :about_me, class: 'form-control about_me' %>
+
+    </div>
+
+
+
+
+    
+
+
+
+    <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+
+  </div>
+</div>

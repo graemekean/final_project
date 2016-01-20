@@ -40,7 +40,10 @@ class ProfileController < ApplicationController
  end
 
  def edit
-  @profile = Profile.new(profile_params)
+      @user = current_user
+      @profile = @user.profile
+      # @user.profile = @profile
+      # redirect_to(profile_path)
  end
 
  # POST /statuses
@@ -68,8 +71,19 @@ class ProfileController < ApplicationController
  # PATCH/PUT /statuses/1
  # PATCH/PUT /statuses/1.json
  def update
+      # @profile = Profile.find(profile_params[:id])
+      @user = current_user
+      @profile = @user.profile
+      # @user.profile = @profile
+      # redirect_to(profile_path)
+
+  # @user.update(user_params) #from the private method below - whitelist check
+
+ 
+
    respond_to do |format|
      if @profile.update(profile_params)
+
        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
        format.json { render :show, status: :ok, location: @profile }
      else
@@ -101,7 +115,7 @@ class ProfileController < ApplicationController
    # end
 
    def profile_params
-    params.require(:user).permit(:user_id, :id, :name, :email, :password, :first_name, :last_name, :profile_name,
+    params.require(:profile).permit(:user_id, :name, :email, :password, :first_name, :last_name, :profile_name,
       :password_confirmation, :youtube_url, :linkedin_url, :role, :profile_image, :profile_video, :about_me, :primary_skill, :twitter_feed, :soundcloud_url)
     end
 

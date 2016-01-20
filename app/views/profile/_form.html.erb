@@ -1,42 +1,43 @@
-<%= simple_form_for(@profile) do |f| %>
-  <% if @profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
 
-      <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+
+<div class="container edit_user">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% provide(:title, "Edit user Profile") %>
+    <h1>Update your profile</h1>
+
+
+    <%= simple_form_for(@profile) do |f| %>
+    <%#= render 'shared/error_messages' %>
+    <div class="col-md-6">
+
+      <%= f.input :first_name %>
+      <br>
+      <%= f.input :last_name %>
+      <br>
+      <%= f.input :profile_name %>    
+      <br>  
+      <%= f.input :profile_image %>
+      <%= f.hidden_field :user_id, :value => current_user.id %> 
+     
+
     </div>
-  <% end %>
 
-<div class="field">
-    <%#= f.input :user_id, collection: User.all, label_method: :profile_name %>
+    <div class="col-md-6">
+      <%= f.input :about_me %>
 
-    <%#= f.hidden_field :created_at, :value => Time.now %>
+    </div>
 
-    <!-- <%#= f.hidden_field :name, :value => current_user.email %>  -->
-    <%= f.hidden_field :user_id, :value => current_user.id %> 
 
+
+
+    
+
+
+
+    <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
 
 
   </div>
-  
-  <div class="field">
-    <%= f.input :first_name %><br>
-  </div>
-  <div class="field">
-    <%= f.input :last_name %><br>
-  </div>
-  <div class="field">
-    <%= f.input :profile_name %><br>
-  </div>
-  <!-- <div class="field">
-    <%#= f.input :created_at %><br>
-  </div> -->
-
-  <div class="actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>

@@ -5,23 +5,21 @@ class StatusesController < ApplicationController
   # GET /statuses.json
   def index
 
-   
+    if current_user
+
       @user = current_user
       @statuses = @user.statuses.all
 
-  
-
-
-    
-
-    
+    else
+      redirect_to(new_user_registration_path)
+    end
 
   end
 
   # GET /statuses/1
   # GET /statuses/1.json
   def show
- 
+
     # @user = current_user
     # @statuses = user.statuses.all
     @status = Status.find(params[:id])
@@ -94,12 +92,12 @@ class StatusesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-   def status_params
+    def status_params
      params.require(:status).permit(:email, :content, :created_at, :user_id, :id)
    end
 
-    def user_params
-      params.require(:user).permit(:id)
+   def user_params
+    params.require(:user).permit(:id)
 
-    end
   end
+end
