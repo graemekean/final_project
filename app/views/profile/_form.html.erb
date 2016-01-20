@@ -17,7 +17,16 @@
       <br>
       <%= f.input :profile_name %>    
       <br>  
-      <%= f.input :profile_image %>
+      <%= f.label :profile_image, 'Upload a profile picture of yourself:' %><br>
+      <%= f.file_field :profile_image, class: "form-control" %>
+
+
+      <%= f.input :youtube_url %>
+      <%= f.input :soundcloud_url %>
+      <%= f.input :linkedin_url %>
+      
+
+
       <%= f.hidden_field :user_id, :value => current_user.id %> 
      
 

@@ -6,6 +6,28 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
+  include CarrierWave::RMagick
+  # include CarrierWave::MiniMagick
+
+  version :thumb do
+    process :resize_to_fill => [100, 100]
+  end
+
+  version :medium do
+    process :resize_to_fill => [400, 400]
+  end
+
+  version :large do
+    process :resize_to_fit => [1000, 1000]
+  end
+
+
+  version :original do
+
+    
+  end
+
+
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
@@ -30,6 +52,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def scale(width, height)
   #   # do something
   # end
+
+  def extension_white_list
+     %w(jpg jpeg gif png)
+   end
 
   # Create different versions of your uploaded files:
   # version :thumb do
