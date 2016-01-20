@@ -25,19 +25,22 @@ Rails.application.routes.draw do
   end
 
   resources :projects
-  resources :profile
+  # resources :profile
   resources :statuses
   resources :friendships
   resources :stems
-  resources :studios
+  # resources :studios
 
   # get 'studios/index'
   # post 'studios/new'
 
 
   # get 'feed', to: 'statuses#index', as: :feed
-  get '/:id', to: 'profile#show'
-  # get '/:id', to: 'profile#edit'
+  get '/:id', to: 'profile#show', as: 'profile'
+  # get 'profile/show'
+
+  get '/:id', to: 'studio#show', as: 'studio'
+  get '/:id', to: 'profile#edit'
 
 
   root to: 'statuses#index'
@@ -49,7 +52,7 @@ Rails.application.routes.draw do
 
  
 
-  get 'profiles/show'
+  # get 'profiles/show'
 
 
 

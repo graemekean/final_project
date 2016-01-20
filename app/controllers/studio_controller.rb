@@ -1,13 +1,16 @@
 class StudiosController < ApplicationController
 def index
   @user = current_user
-  @studios = Studio.all
- 
+  @studio = @user.studio
+
   
 end
 
 
   def show
+
+    @user = current_user
+    @studio = @user.studio
 
   # if current_user.studios[0]
   #     @user = current_user
@@ -32,7 +35,7 @@ end
 
     @user = current_user
 
-    @studio = @user.studios.build(studio_params)
+    @studio = @user.studio.new(studio_params)
     
     params[:user_id] = current_user.id
      # current_user.albums.create(album_params)

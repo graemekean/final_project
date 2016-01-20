@@ -1,4 +1,169 @@
-<p id="notice"><%= notice %></p>
+
+
+<div class='container'>
+  <div class="row">
+    <div class='col-md-6'>
+      <h2><%= @user.email %></h2>
+
+      <%#= button_to('Delete User', user_path(@user), method: :delete, data:{confirm: "Delete user? Are you sure?"}) %>
+      
+
+      <div class="profile_image">
+        <%#= link_to image_tag(@user.profile_image.medium.url), @user.profile_image.original.url if @user.profile_image?%> 
+      </div>
+    </div>
+
+    <div class='col-md-6' style="padding-top:40px;">
+      
+        <div class="col-md-3 gendericon">
+          <%# if @user.gender == "Male" %>
+          <%#= image_tag("/icons/male.png") %>
+          <%# else %>
+          <%#= image_tag("/icons/female.png") %>
+          <%# end %>
+        </div>
+        <div class="col-md-9" style="text-align:left; padding-top:15px;">
+          <p>Name: <%#= @user.full_name %></p>
+          <p>Email: <%= @user.email %></p>
+          <p>Date of birth: <%#= @user.date_of_birth %></p>    
+          <p>Role: <%#= @user.role %></p>  
+          <p>Age : <%#= @user.age %></p>
+        </div>
+        <div class="col-md-12" style="text-align:left;" >
+          <p>About Me:</p>
+          <p><%= @profile.about_me %></p>
+        </div>
+        <% if current_user == @user %>
+        <div class="col-md-12" style="text-align:right;" >
+          <%#= link_to("Edit My Profile", edit_profile_path(@user), class: "btn btn-primary") %>
+        </div>
+        <% end %>
+
+
+      </div>
+    
+         
+      <%#= @user.toggle_follow!(@user) %>
+
+      <% unless current_user == @user %>
+      <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+      <% end %>
+      
+  </div>
+</div>
+
+
+
+  <%# if current_user == @user %>
+  <!-- <div class="col-md-12"> -->
+    <!-- <h4>Friend Requests</h4> -->
+    <%# if @user.requested_friendships == true %>
+
+    <%# @user.requested_friendships.each do |request| %>
+    <!-- <div class="col-md-12"> -->
+
+      <%#= image_tag(request.profile_image.thumb.url) if request.profile_image %>
+      <%#= request.name %> <!-- would like to be friends -->
+      <%#= link_to "Accept", friendship_path(:id => request), :method => "put", class: "btn btn-primary" %> 
+      <%#= link_to "Decline", friendship_path(:id => request), :method => :delete, class: "btn btn-danger"  %>
+
+    <!-- </div> -->
+    <%# end %>
+
+    <%# else %>
+    <!-- <p>You have no pending friend requests</p> -->
+    <%# end %>
+  <!-- </div> -->
+  <%# end %>
+
+
+<div class="container">
+    <div class="col-md-12">
+          <h2>Friends</h2>
+    </div>
+
+    <%# if @user.friends == true %>
+    <% @user.friends.each do |friend| %>
+    <div class="col-md-2">
+    
+
+        <%#= link_to image_tag(friend.profile_image.thumb.url), friend.profile_image.original.url if friend.profile_image?%> 
+    </div>
+        <%= friend.email %> 
+        <%#= friend.send_message %> 
+
+        <%# if current_user == @user %>
+        <%#= link_to "Remove", friendship_path(:id => friend), :method => :delete, class: "btn btn-danger" %>
+        <%# end %>
+      
+    <% end %>
+    <%# else %>
+    <!-- <p>user has not added any friends</p> -->
+    <%# end %>
+</div>
+
+
+
+  <!-- <div class="row"> -->
+    <div class="col-md-12">
+
+      <h2>User Timeline</h2>
+
+      <%# if @user.photos == true %>
+      <% @user.statuses.each do |status| %>
+
+      <div class="col-md-3 user_timeline">
+
+      <%= status.content %>
+
+        <%# if photo.album_id == @album.id %>
+        <%#= recipe.name %>
+        <%#= link_to(photo.title, photo_path(photo)) %>
+        <%#= link_to image_tag(photo.photo_image.medium.url), photo.photo_image.original.url if photo.photo_image? == true %>  
+      </div> 
+      <% end %>
+      <%# else %>
+      <!-- <p>User has not uploaded any photos</p> -->
+      <%# end %>
+    </div>
+  <!-- </div> -->
+
+  <%# render current_user.mailbox.inbox %>
+
+</div>
+<div class="container">
+  <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav pull-right">
+          <% if user_signed_in? %>
+              <li><%= link_to "Hello, #{current_user.email}", "#" %></li>
+              <li><%#= link_to "Inbox", mailbox_inbox_path %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+              <li class="active"><%= link_to "Login", new_user_session_path %></li>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <p id="notice"><%= notice %></p>
 
 <p>
   <strong>First Name:</strong>
@@ -19,10 +184,10 @@
   <strong>User_id:</strong>
   <%= @profile.user_id %>
 </p>
+ -->
 
 
 
 
-
-<%= link_to 'Edit', edit_profile_path(@project) %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to 'Profile', profile_path(current_user) %> |
+<%= link_to 'Back', profile_path %>

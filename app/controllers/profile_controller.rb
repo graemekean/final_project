@@ -13,26 +13,28 @@ class ProfileController < ApplicationController
 
  end
 
+ def show
+   @user = current_user
+   @profile = @user.profile
+  
+   if @user
+     @statuses = @user.statuses.all
+     render action: :show
+   else
+     render file: 'public/404', status: 404, formats: [:html]
+   end
+ end
+
  # GET /statuses/1
  # GET /statuses/1.json
- def show
-
-   @user = current_user
-   # @profile = user.statuses.all
-
-   @profile = Profile.find(profile_params[:id])
-   
-
-
- end
 
  # GET /statuses/new
  def new
   @profile = Profile.new
 
   @user = current_user
-raise
-  @user.profile << @profile
+
+  @user.profile = @profile
 
 
  end
@@ -48,7 +50,7 @@ raise
 
    @user = current_user
 
-   @user << @profile
+   @user.profile = @profile
 
 
 
@@ -99,7 +101,7 @@ raise
    # end
 
    def profile_params
-    params.require(:profile).permit(:user_id, :id, :name, :email, :password, :first_name, :last_name, :profile_name,
+    params.require(:user).permit(:user_id, :id, :name, :email, :password, :first_name, :last_name, :profile_name,
       :password_confirmation, :youtube_url, :linkedin_url, :role, :profile_image, :profile_video, :about_me, :primary_skill, :twitter_feed, :soundcloud_url)
     end
 
