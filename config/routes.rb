@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  get 'stem/new'
+
+  get 'stem/edit'
+
+  get 'stem/show'
+
+  get 'mixer/show'
+
   get 'statuses/index'
 
   get 'statuses/show'

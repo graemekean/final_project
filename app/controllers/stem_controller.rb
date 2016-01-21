@@ -1,13 +1,10 @@
 class StemController < ApplicationController
-  def index
-  end
-
-  def show
+  def new
   end
 
   def edit
   end
 
-  def delete
+  def show
   end
 end
