@@ -1,0 +1,42 @@
+<%= simple_form_for(@stem) do |f| %>
+  <% if @stem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stem.errors.count, "error") %> prohibited this stem from being saved:</h2>
+
+      <ul>
+      <% @stem.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  t.integer  "user_id"
+  t.integer  "project_id"
+  t.string   "description"
+  t.string   "key"
+  t.decimal  "bpm"
+  t.string   "instrument"
+
+  <div class="field">
+    <%= f.input :description %>
+    <%= f.hidden_field :user_id, :value => @project.user %> 
+    <%= f.hidden_field :user_id, :value => @project.id %> 
+
+
+  </div>
+  <div class="field">
+    <%= f.input :bpm %>
+  </div>
+  <div class="field">
+    <%= f.input :key %>
+  </div>
+  <div class="field">
+    <%= f.input :instrument %>
+  </div>
+ 
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

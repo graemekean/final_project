@@ -13,13 +13,18 @@
 <div class="session-full">
  <!--  <strong><%#= studio.user.email %></strong>
   <p>Name: <%#= studio.user.status %></p> -->
-  <p><%= project.title %></p>
-  <p><%= project.genre %></p>
-  <p><%= project.preview_url %></p>
+  <!-- <p>Title: <%#= project.title %></p> -->
+  <br>
+  <p>Title: <%= link_to project.title, project %></p>
+
+  <p>Stems: <%= project.stems.count %></p>
+  <p>Genre: <%= project.genre %></p>
+  <p>Preview: <%= project.preview_url %></p>
+  <p>Created: <%= link_to time_ago_in_words(project.created_at) + " ago", project %></p>
 
 
 
-  <%= link_to time_ago_in_words(project.created_at) + " ago", project %> | 
+
 
   <span class="session-control">
     <%= link_to "Back", profile_path %> | 
