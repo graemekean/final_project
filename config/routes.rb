@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :posts
   get 'stems/show'
 
   get 'stems/edit'
