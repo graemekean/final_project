@@ -15,7 +15,7 @@ end
 
   
 
-    @projects = @user.studio.projects.all
+    @projects = @user.projects.all
 
 
 

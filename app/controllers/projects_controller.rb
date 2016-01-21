@@ -18,8 +18,8 @@ class ProjectsController < ApplicationController
   def new
     @user = current_user
     @project = Project.new
-    @studio = @user.studio
-    @studio.projects << @project
+    # @studio = @user.studio
+    @user.projects << @project
 
   end
 

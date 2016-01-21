@@ -1,0 +1,50 @@
+
+
+<div class="container edit_user">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% provide(:title, "Edit user Profile") %>
+    <h1>UAdd a stem</h1>
+
+
+ 
+
+    <%= simple_form_for(@stem) do |f| %>
+    <%#= render 'shared/error_messages' %>
+    <div class="col-md-6">
+
+      <%= f.input :description %>
+      <br>
+      <%= f.input :key %>
+      <br>
+      <%= f.input :bpm %>    
+      <br>  
+      <%#= f.label :instrument, 'Upload a profile picture of yourself:' %><br>
+      <%#= f.file_field :profile_image, class: "form-control" %>
+
+
+     
+      
+
+
+      <!-- <%#= f.hidden_field :user_id, :value => current_user.id %>  -->
+      <%#= f.hidden_field :project_id, :value => current_user.id %> 
+
+     
+
+    </div>
+
+    
+
+
+
+    
+
+
+
+    <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+
+  </div>
+</div>
