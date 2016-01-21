@@ -1,4 +1,4 @@
-class StudiosController < ApplicationController
+class StudioController < ApplicationController
 def index
   @user = current_user
   @studio = @user.studio
@@ -9,8 +9,17 @@ end
 
   def show
 
+
     @user = current_user
     @studio = @user.studio
+
+  
+
+    @projects = @user.studio.projects.all
+
+
+
+
 
   # if current_user.studios[0]
   #     @user = current_user
@@ -32,11 +41,8 @@ end
   end
 
   def create
-
     @user = current_user
-
-    @studio = @user.studio.new(studio_params)
-    
+    @studio = @user.studio.new(studio_params)   
     params[:user_id] = current_user.id
      # current_user.albums.create(album_params)
     # redirect_to(albums_path)

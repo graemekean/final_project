@@ -16,7 +16,11 @@ class ProjectsController < ApplicationController
 
   # GET /sessions/new
   def new
+    @user = current_user
     @project = Project.new
+    @studio = @user.studio
+    @studio.projects << @project
+
   end
 
   # GET /sessions/1/edit

@@ -1,0 +1,39 @@
+<!-- <p id="notice"><%#= notice %></p> -->
+
+
+<div class="page-header">
+  <h1>My studio</h1>
+  <%= link_to 'New Project', new_project_path %>
+
+</div>
+
+
+
+<% @projects.each do |project| %>
+<div class="session-full">
+ <!--  <strong><%#= studio.user.email %></strong>
+  <p>Name: <%#= studio.user.status %></p> -->
+  <p><%= project.title %></p>
+  <p><%= project.genre %></p>
+  <p><%= project.preview_url %></p>
+
+
+
+  <%= link_to time_ago_in_words(project.created_at) + " ago", project %> | 
+
+  <span class="session-control">
+    <%= link_to "Back", profile_path %> | 
+    <%= link_to "Edit", edit_project_path(project) %> | 
+    <%= link_to "Delete", project, method: :delete, data: {confirm: "Are you sure you want to delete this project? Doing so will also delete any audio files contained within it."}  %>
+  </span> 
+
+
+
+  <!-- <p><%#= session.user %> -->
+</div>
+<% end %>
+<% else %>
+
+
+
+

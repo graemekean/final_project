@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120133123) do
+ActiveRecord::Schema.define(version: 20160121145110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,26 @@ ActiveRecord::Schema.define(version: 20160120133123) do
   end
 
   add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", using: :btree
+
+  create_table "mixers", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mixes", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.string   "file_name"
+    t.integer  "user_id"
+    t.string   "instrument"
+    t.decimal  "bpm"
+    t.string   "key"
+    t.string   "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
