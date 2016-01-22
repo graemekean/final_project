@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Add a stem to this project', new_stem_path %>
+<%= link_to 'Add a stem to this project', new_project_stem_path(@project) %>
 
 <p>
   <strong>Title:</strong>
@@ -64,13 +64,13 @@
 
 <%# if @project.stems? %>
 
-<%# @project.stems.each do |stem| %>
+<% @project.stems.each do |stem| %>
 <div class="session-full">
-  <strong><%#= stem.description %></strong>
-  <p>BPM: <%#= stem.bpm %></p>
-  <p><%#= stem.instrument %></p>
+  <strong><%= stem.description %></strong>
+  <p>BPM: <%= stem.bpm %></p>
+  <p><%= stem.instrument %></p>
 
-  <%#= link_to time_ago_in_words(stem.created_at) + " ago", stem %> | 
+  <%= link_to time_ago_in_words(stem.created_at) + " ago", stem %> | 
 
   <span class="session-control">
     <%#= link_to "Show", stem %> | 
@@ -82,7 +82,7 @@
 
   <!-- <p><%#= session.user %> -->
 </div>
-<%# end %>
+<% end %>
 <%# end %>
 
 

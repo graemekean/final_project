@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   
 
 
-  has_many :stems
+  # has_many :stems
   has_many :statuses
 
 

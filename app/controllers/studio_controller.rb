@@ -11,13 +11,15 @@ end
 
 
     @user = current_user
-    @studio = @user.studio
+    # @studio = @user.studio
 
   
 
     @projects = @user.projects.all
 
-   
+
+
+
 
 
 

@@ -37,7 +37,9 @@ Rails.application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy', as: :logout
   end
 
-  resources :projects
+  resources :projects do
+    resources :stems
+  end
   resources :profile
   resources :statuses
   resources :friendships
