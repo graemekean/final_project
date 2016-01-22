@@ -9,8 +9,20 @@ class User < ActiveRecord::Base
 
   # create join table association for friendships to associate a user with another user
 
-  has_many :friendships
-  has_many :friends, through: :friendships
+    has_many :friendships
+    has_many :friends, -> {where(friendships: {state: 'accepted' })}, through: :friendships 
+
+
+
+
+
+    has_many :pending_friendships, class_name: 'Friendship', foreign_key: :user_id
+    has_many :pending_friends, -> {where(friendships: {state: 'pending' })}, through: :pending_friendships, source: :friend
+
+
+
+
+
 
   has_many :memberships
   has_many :projects, through: :memberships

@@ -7,7 +7,7 @@ class ProfileController < ApplicationController
  # GET /statuses.json
  def index
 
-   @user = current_user
+   # @user = current_user
    @profiles = Profile.all
 
 

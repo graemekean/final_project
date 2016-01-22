@@ -1,6 +1,5 @@
 class FriendshipsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new]
-
+  before_filter :authenticate_user!
 
   def new
 
@@ -8,15 +7,16 @@ class FriendshipsController < ApplicationController
       @friend = User.where(profile_name: params[:friend_id]).first
       @friendship = current_user.friendships.new(friend: @friend)
     else
-      falsh[:error] = "A friend is required to form a friendship"
+      flash[:error] = "A friend is required to form a friendship"
       redirect_to(profiles_show_path)
     end
 
   end
 
   def index
-    # @friends = current_user.friends.all
+    
     @users = User.all
+    @friendships = current_user.friendships.all
   end
 
   def create
@@ -54,7 +54,7 @@ class FriendshipsController < ApplicationController
   private
 
    def params
-    params.require(:friendship).permit(:user_id, :friend_id)
+    params.require(:friendship).permit(:user_id, :friend_id, :state)
   end
 
 
