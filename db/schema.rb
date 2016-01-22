@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121230143) do
+ActiveRecord::Schema.define(version: 20160122120007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20160121230143) do
 
   add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", using: :btree
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "memberships", ["user_id", "project_id"], name: "index_memberships_on_user_id_and_project_id", using: :btree
+
   create_table "mixers", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "status"
@@ -50,6 +59,15 @@ ActiveRecord::Schema.define(version: 20160121230143) do
     t.decimal  "bpm"
     t.string   "key"
     t.string   "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -87,13 +105,6 @@ ActiveRecord::Schema.define(version: 20160121230143) do
     t.integer  "studio_id"
   end
 
-  create_table "projects_users", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-  end
-
-  add_index "projects_users", ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id", using: :btree
-
   create_table "statuses", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "content"
@@ -102,15 +113,14 @@ ActiveRecord::Schema.define(version: 20160121230143) do
   end
 
   create_table "stems", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
     t.string   "description"
     t.string   "key"
     t.decimal  "bpm"
     t.string   "instrument"
     t.datetime "date_created"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "membership_id"
   end
 
   create_table "studios", force: :cascade do |t|

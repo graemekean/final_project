@@ -18,6 +18,8 @@
   <p>Title: <%= link_to project.title, project %></p>
 
   <p>Stems: <%= project.stems.count %></p>
+  <p>Genre: <%= project.description %></p>
+
   <p>Genre: <%= project.genre %></p>
   <p>Preview: <%= project.preview_url %></p>
   <p>Created: <%= link_to time_ago_in_words(project.created_at) + " ago", project %></p>

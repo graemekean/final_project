@@ -15,13 +15,13 @@
 
     <div class='col-md-6' style="padding-top:40px;">
       
-        <div class="col-md-3 gendericon">
+        
           <%# if @user.gender == "Male" %>
           <%#= image_tag("/icons/male.png") %>
           <%# else %>
           <%#= image_tag("/icons/female.png") %>
           <%# end %>
-        </div>
+       
         <div class="col-md-9" style="text-align:left; padding-top:15px;">
           <p>First Name: <%= @profile.first_name %></p>
           <p>Last name: <%= @profile.last_name %></p>

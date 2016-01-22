@@ -1,2 +1,39 @@
-<h1>Stems#index</h1>
-<p>Find me in app/views/stems/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Stems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>BPM</th>
+      <th>Key</th>
+      <th>Instrument</th>
+      <th>User</th>
+      <th>Project</th>
+
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stems.each do |stem| %>
+      <tr>
+        <td><%= stem.description %></td>
+        <td><%= stem.bpm %></td>
+        <td><%= stem.key %></td>
+        <td><%= stem.instrument %></td>
+        <td><%= stem.user %></td>
+        <td><%= stem.project %></td>
+        <td><%= link_to 'Show', stem %></td>
+        <td><%= link_to 'Edit', edit_stem_path(stem) %></td>
+        <td><%= link_to 'Destroy', stem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stem', new_stem_path %>

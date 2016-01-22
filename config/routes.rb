@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   
 
+  get 'comment/show'
+
+  get 'comment/edit'
+
+  get 'comment/index'
+
+  get 'comment/new'
+
   resources :posts
-  get 'stems/show'
-
-  get 'stems/edit'
-
-  get 'stems/new'
-
-  get 'stems/index'
 
   get 'mixer/show'
 
