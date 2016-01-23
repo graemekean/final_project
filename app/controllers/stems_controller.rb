@@ -13,8 +13,7 @@ class StemsController < ApplicationController
 
   # GET /posts/1
   # GET /posts/1.json
-  def show
-    raise
+def show
     @stem = Stem.find(stem_params[:membership_id])
     @project = @stem.membership.project
 
@@ -27,7 +26,7 @@ class StemsController < ApplicationController
 
     @stems = Stem.all
 
-
+raise
   end
 
   # GET /posts/new

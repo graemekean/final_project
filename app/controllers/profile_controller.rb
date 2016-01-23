@@ -11,11 +11,15 @@ class ProfileController < ApplicationController
    @profiles = Profile.all
 
 
+
  end
 
  def show
-   @user = current_user
-   @profile = @user.profile
+   # @user = User.find(params[:id])
+   @profile = Profile.find(params[:id])
+
+   @user = @profile.user
+   # @profile = @user.profile
   
    if @user
      @statuses = @user.statuses.all
@@ -41,6 +45,7 @@ class ProfileController < ApplicationController
 
  def edit
       @user = current_user
+
       @profile = @user.profile
       # @user.profile = @profile
       # redirect_to(profile_path)

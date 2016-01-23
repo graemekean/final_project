@@ -13,13 +13,13 @@
   <p>Name: <%= profile.last_name %></p>
   <p><%= profile.about_me %></p>
 
-  <%= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> | 
+  <%#= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> 
 
   <span>
-    <%= link_to "Show", profile %> | 
-    <%= link_to "Edit", edit_profile_path(profile) %> | 
-    <%= link_to "Delete", profile, method: :delete, data: {confirm: "Are you sure you want to delete this profile? Doing so will clear your profile and make you unavailable to your friends"}  %>
+    <%= link_to "Show", profile %>
   </span> 
+ <br>
+ <br>
 
 
 

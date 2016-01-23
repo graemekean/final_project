@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   # get 'stem/edit'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   devise_scope :user do
     get 'register', to: 'devise/registrations#new', as: :register
@@ -42,7 +42,14 @@ Rails.application.routes.draw do
   end
   resources :profile
   resources :statuses
-  resources :friendships
+  # resources :friendships
+  resources :friendships do
+    member do
+      put :accept
+    end
+  end
+
+
   resources :stems
   resources :studio
 
