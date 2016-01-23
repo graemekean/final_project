@@ -7,9 +7,11 @@ gem 'devise'
 gem 'cancancan', '~> 1.10'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'faker'
 
 gem 'simple_form'
-gem 'state_machine'
+# gem 'state_machine'
+gem 'state_machines-activerecord'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
