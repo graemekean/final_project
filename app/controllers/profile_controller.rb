@@ -10,8 +10,6 @@ class ProfileController < ApplicationController
    # @user = current_user
    @profiles = Profile.all
 
-
-
  end
 
  def show
@@ -35,12 +33,8 @@ class ProfileController < ApplicationController
  # GET /statuses/new
  def new
   @profile = Profile.new
-
   @user = current_user
-
   @user.profile = @profile
-
-
  end
 
  def edit
@@ -59,13 +53,16 @@ class ProfileController < ApplicationController
    @user = current_user
 
    @user.profile = @profile
+   @profile.save
 
 
 
    respond_to do |format|
-     if profile.save
+     if @profile.save
        format.html { redirect_to profile, notice: 'Profile was successfully created.' }
        format.json { render :show, profile: :created, location: profile }
+        @profile.create(profile_image: image)
+
      else
        format.html { render :new }
        format.json { render json: status.errors, status: :unprocessable_entity }

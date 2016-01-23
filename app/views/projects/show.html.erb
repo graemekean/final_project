@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Add a stem to this project', new_project_stem_path(@project) %>
+<% if @project.user = current_user %>
 
+<%= link_to 'Add a stem to this project', new_project_stem_path(@project) %>
+<% end %>
 <p>
   <strong>Title:</strong>
   <%= @project.title %>

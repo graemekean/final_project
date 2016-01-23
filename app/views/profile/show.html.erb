@@ -1,60 +1,73 @@
 
 
-<div class='container'>
+<div class='container-fluid'>
   <!-- <div class="row"> -->
-  <div class='col-md-12'>
-    <h2><%= @user.email %></h2>
-
-    <%#= button_to('Delete User', user_path(@user), method: :delete, data:{confirm: "Delete user? Are you sure?"}) %>
-
-
-    <div class="profile_image">
-    <%= link_to image_tag(@profile.profile_image.medium.url), @profile.profile_image.original.url if @profile.profile_image?%> 
+  <div class='row'>
+    <div class="col-md-12"
+    <h2><%= @user.profile.profile_name %></h2>
     </div>
   </div>
 
-  <div class='col-md-12' style="padding-top:40px;">
-
-
-    <%# if @user.gender == "Male" %>
-    <%#= image_tag("/icons/male.png") %>
-    <%# else %>
-    <%#= image_tag("/icons/female.png") %>
-    <%# end %>
-
-    <div class="col-md-9" style="text-align:left; padding-top:15px;">
-      <p>First Name: <%= @profile.first_name %></p>
-      <p>Last name: <%= @profile.last_name %></p>
-      <p>Profile Name: <%= @profile.profile_name %></p>  
-      <p>Primary index: <%= @profile.infleunces %></p>
-
-      <p>Role on site: <%= @profile.role %></p>  
-      <p>Musical Infleunces: <%= @profile.infleunces %></p>
-      <p>Genres I like: <%= @profile.genres %></p>
-      <p>Youtube channel: <%= @profile.youtube_url %></p>
-      <p>Soundcloud Stream: <%= @profile.soundcloud_url %></p>
-
-
+  <div class='row'>
+    <div class="col-md-12">
+      <%= link_to image_tag(@profile.profile_image.medium.url), @profile.profile_image.large.url if @profile.profile_image?%> 
     </div>
-    <div class="col-md-12" style="text-align:left;" >
-      <p>About Me:</p>
-      <p><%= @profile.about_me %></p>
+  </div>
+
+  <div class="row"></div>
+    <div class="col-md-6">
+      <!-- <%#= link_to image_tag("/icons/soundcloud_icon.png"), @profile.soundcloud_url.to_s %>  -->
+      <%= link_to image_tag("/images/icons/soundcloud_icon.png", class: "icon"), image_path("http://#{@profile.soundcloud_url}"), class: "colorbox" %>
+
+      <%= link_to image_tag("/images/icons/youtube_icon.png", class: "icon"), image_path("http://#{@profile.youtube_url}"), class: "colorbox" %>
+
+        <%#= link_to "Soundcloud", "http://www.soundcloud.com", :target => "_blank" %>
     </div>
-    <% if current_user == @user %>
-    <div class="col-md-12" style="text-align:right;" >
-      <%= link_to("Edit My Profile", edit_profile_path(@user), class: "btn btn-primary") %>
-    </div>
-    <% end %>
+  </div>
+</div>
+
+<div class='col-md-12' style="padding-top:40px;">
+
+
+  <%# if @user.gender == "Male" %>
+  <%#= image_tag("/icons/male.png") %>
+  <%# else %>
+  <%#= image_tag("/icons/female.png") %>
+  <%# end %>
+
+  <div class="col-md-9" style="text-align:left; padding-top:15px;">
+    <p>First Name: <%= @profile.first_name %></p>
+    <p>Last name: <%= @profile.last_name %></p>
+    <p>Profile Name: <%= @profile.profile_name %></p>  
+    <p>Primary index: <%= @profile.infleunces %></p>
+
+    <p>Role on site: <%= @profile.role %></p>  
+    <p>Musical Infleunces: <%= @profile.infleunces %></p>
+    <p>Genres I like: <%= @profile.genres %></p>
+    <p>Youtube channel: <%= @profile.youtube_url %></p>
+    <p>Soundcloud Stream: <%= @profile.soundcloud_url %></p>
 
 
   </div>
-
-
-  <%#= @user.toggle_follow!(@user) %>
-
-  <% unless current_user == @user %>
-  <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+  <div class="col-md-12" style="text-align:left;" >
+    <p>About Me:</p>
+    <p><%= @profile.about_me %></p>
+  </div>
+  <% if current_user == @user %>
+  <div class="col-md-12" style="text-align:right;" >
+    <%= link_to("Edit My Profile", edit_profile_path(@user), class: "btn btn-primary") %>
+  </div>
   <% end %>
+
+
+</div>
+
+
+<%#= @user.toggle_follow!(@user) %>
+
+<% unless current_user == @user %>
+<%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+<% end %>
 
 </div>
 </div>

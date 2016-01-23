@@ -6,6 +6,8 @@ gem 'rails', '4.2.4'
 gem 'devise'
 gem 'cancancan', '~> 1.10'
 gem 'carrierwave'
+gem 'rmagick'
+
 gem 'simple_form'
 gem 'state_machine'
 # Use postgresql as the database for Active Record
