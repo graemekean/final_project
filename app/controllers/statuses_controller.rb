@@ -14,7 +14,9 @@ class StatusesController < ApplicationController
       @friends.each do |friend|
         @feed += friend.statuses
       end
-      @statuses = @feed.sort_by(&:created_at)
+      combined = @feed + @mystatuses
+
+      @statuses = combined.sort_by(&:created_at).reverse
 
 
 
@@ -88,6 +90,7 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
+    @status = Status.find(params[:id])
     @status.destroy
     respond_to do |format|
       format.html { redirect_to statuses_url, notice: 'Status was successfully destroyed.' }
@@ -98,8 +101,8 @@ class StatusesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_status
-      user = current_user
-      @status = user.statuses.find(params[:id])
+      @user = current_user
+      @status = @user.statuses.all.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

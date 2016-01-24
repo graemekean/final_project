@@ -211,7 +211,18 @@ namespace :db do
                                 :commentable_type => 'project')
 
       project.comments << comment
+      
+    end
 
+    1000.times do |c|
+      user = User.all.sample
+      status = user.statuses.all.sample
+      comment = Comment.create!(:title =>  user.id ,
+                                :content => Faker::Lorem.paragraph,
+                                :commentable_id => status.id,
+                                :commentable_type => 'status')
+
+      status.comments << comment
       
     end
 
