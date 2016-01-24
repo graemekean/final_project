@@ -1,0 +1,30 @@
+
+
+<div class="container edit_user">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% provide(:title, "Edit Group") %>
+    <h1>Edit Group</h1>
+
+
+    <%= simple_form_for(@group) do |f| %>
+    <%#= render 'shared/error_messages' %>
+    <div class="col-md-6">
+
+      <%= f.input :title %>
+      <br>
+      <%= f.input :description %>
+      <br>
+      
+      <%= f.hidden_field :creator, :value => current_user.profile.profile_name %> 
+     
+
+    </div>
+
+
+    <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+
+  </div>
+</div>

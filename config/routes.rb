@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     resources :messages
    end
 
+  resources :groups
 
   resources :stems
   resources :studio

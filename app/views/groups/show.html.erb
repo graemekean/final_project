@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+
+  <strong>Title:</strong>
+  <%= @group.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @group.description %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @group.creator %> 
+</p>
+
+
+<h1> Group members </h1>
+<%# if @project.stems? %>
+
+<% @group.group_memberships.each do |group_membership| %>
+<div class="session-full">
+  <strong><%= group_membership.user.profile.profile_name %></strong>
+  <!-- <p><%#= session.user %> -->
+</div>
+<% end %>
+<%# end %>
+
+
+
+
+<!-- <p>
+  <strong>User:</strong>
+  <%#= @project.user_id %>
+</p> -->
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
+
+
+
+
+
+
+
+
+
+
+ 

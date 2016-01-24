@@ -8,6 +8,7 @@ gem 'cancancan', '~> 1.10'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'faker'
+gem 'to_words'
 
 gem 'simple_form'
 # gem 'state_machine'

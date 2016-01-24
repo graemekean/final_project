@@ -150,7 +150,7 @@ namespace :db do
                       :status => 'public')
         user.studio = studio
     
-    # CGENERATE 5 PROJECTS FOR EACH RANDOM PROFILE
+    # GENERATE 5 PROJECTS FOR EACH RANDOM PROFILE
       5.times do |c|
 
         project = Project.create!(:title => Faker::Hacker.ingverb,
@@ -180,7 +180,7 @@ namespace :db do
       end
     end
 
-    
+ # create 1000 random friendships between users   
 
     1000.times do |c|
       user = User.all.sample
@@ -192,6 +192,7 @@ namespace :db do
 
     end
 
+# Add 1000 status updates to random users
 
     1000.times do |c|
       user = User.all.sample
@@ -201,6 +202,8 @@ namespace :db do
 
 
     end
+
+# Add 1000 comments from random users to random projects
 
     1000.times do |c|
       user = User.all.sample
@@ -214,6 +217,8 @@ namespace :db do
       
     end
 
+# Add 1000 comments to random user status updates from random users
+
     1000.times do |c|
       user = User.all.sample
       status = user.statuses.all.sample
@@ -224,6 +229,27 @@ namespace :db do
 
       status.comments << comment
       
+    end
+
+
+# CREATE 50 Groups by randomly generated users
+
+
+    50.times do |c|
+
+      user = User.all.sample
+
+      group = Group.create!(:title => Faker::Team.name,
+                                :description => Faker::Lorem.paragraph(sentence_count = 3),
+                                :creator => user.profile.first_name)
+
+
+
+      group_membership = GroupMembership.new(:user_id => user.id,
+                              :group_id => group.id)
+
+      group.group_memberships << group_membership
+
     end
 
 
