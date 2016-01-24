@@ -54,8 +54,8 @@ class User < ActiveRecord::Base
 
   # create profile and studio objects for each user when the user is created
 
-  after_create :create_profile
-  after_create :create_studio
+  #after_create :create_profile
+  #after_create :create_studio
 
  
   # Include default devise modules. Others available are:

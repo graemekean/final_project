@@ -8,7 +8,18 @@ class StatusesController < ApplicationController
     if current_user
 
       @user = current_user
-      @statuses = @user.statuses.all
+      @friends = @user.friends
+      @mystatuses = @user.statuses
+      @feed = []
+      @friends.each do |friend|
+        @feed += friend.statuses
+      end
+      @statuses = @feed.sort_by(&:created_at)
+
+
+
+      
+
 
     else
       redirect_to(new_user_registration_path)

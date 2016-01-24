@@ -5,7 +5,12 @@ class ProjectsController < ApplicationController
   # GET /sessions.json
   def index
     @user = current_user
-    @projects = Project.all
+    # @projects = Project.find
+
+    # @projects = Project.where(:public :true).order("created_on DESC").find(1)
+
+    @projects = Project.all.where(editable: true).order("created_at DESC")
+
     
   end
 

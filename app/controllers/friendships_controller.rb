@@ -34,42 +34,42 @@ class FriendshipsController < ApplicationController
     @friendships = current_user.friendships.all
   end
 
-  # def create
-  #     if params[:friendship] && params[:friendship].has_key?(:friend_id)
-  #       raise
-  #       @friend = User.where(profile_name: params[:friendship][:friend_id]).first
-  #       @friendship = Friendship.request(current_user, @friend)
-  #       respond_to do |format|
-  #         if @friendship.new_record?
-  #           format.html { flash[:error] = "There was a problem."; redirect_to profile_path(@friend) }
-  #           format.json { render json: @friendship.to_json, status: :precondition_failed }
-  #         else
-  #           format.html { flash[:success] = "Friendship created."; redirect_to profile_path(@friend) }
-  #           format.json { render json: @friendship.to_json }
-  #         end
-  #       end
-  #     else
-  #       flash[:error] = "Friend required"
-  #       redirect_to root_path
-  #     end
-  #   end
-
-
-    def create
-        if params[:friend_id]
-          @friend = User.find(params[:friend_id])
-          @friendship = current_user.friendships.new(friend: @friend)
-          if @friendship.save
-            flash[:success] = "Friendship created."
+  def create
+      if params[:friendship] && params[:friendship].has_key?(:friend_id)
+        raise
+        @friend = User.where(profile_name: params[:friendship][:friend_id]).first
+        @friendship = Friendship.request(current_user, @friend)
+        respond_to do |format|
+          if @friendship.new_record?
+            format.html { flash[:error] = "There was a problem."; redirect_to profile_path(@friend) }
+            format.json { render json: @friendship.to_json, status: :precondition_failed }
           else
-            flash[:error] = "There was a problem."
+            format.html { flash[:success] = "Friendship created."; redirect_to profile_path(@friend) }
+            format.json { render json: @friendship.to_json }
           end
-          redirect_to profile_path(@friend)
-        else
-          flash[:error] = "Friend required"
-          redirect_to root_path
         end
+      else
+        flash[:error] = "Friend required"
+        redirect_to root_path
       end
+    end
+
+
+    # def create
+    #     if params[:friend_id]
+    #       @friend = User.find(params[:friend_id])
+    #       @friendship = current_user.friendships.new(friend: @friend)
+    #       if @friendship.save
+    #         flash[:success] = "Friendship created."
+    #       else
+    #         flash[:error] = "There was a problem."
+    #       end
+    #       redirect_to profile_path(@friend)
+    #     else
+    #       flash[:error] = "Friend required"
+    #       redirect_to root_path
+    #     end
+    #   end
 
   # def create
   #   @friendship = current_user.friendships.build(:friend_id => params[:friend_id], approved: "false")
