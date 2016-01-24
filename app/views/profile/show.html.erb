@@ -46,6 +46,8 @@
     <p>Genres I like: <%= @profile.genres %></p>
     <p>Youtube channel: <%= @profile.youtube_url %></p>
     <p>Soundcloud Stream: <%= @profile.soundcloud_url %></p>
+         <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: @profile.user.id), method: 'post'%>
+
 
 
   </div>

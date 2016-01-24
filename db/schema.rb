@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123200046) do
+ActiveRecord::Schema.define(version: 20160124154349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20160123200046) do
     t.text     "content"
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,6 +43,23 @@ ActiveRecord::Schema.define(version: 20160123200046) do
   add_index "friendships", ["state"], name: "index_friendships_on_state", using: :btree
   add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", using: :btree
 
+  create_table "group_memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "group_memberships", ["user_id", "group_id"], name: "index_group_memberships_on_user_id_and_group_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "creator"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -44,6 +68,18 @@ ActiveRecord::Schema.define(version: 20160123200046) do
   end
 
   add_index "memberships", ["user_id", "project_id"], name: "index_memberships_on_user_id_and_project_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.boolean  "read",            default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "mixers", force: :cascade do |t|
     t.integer  "project_id"

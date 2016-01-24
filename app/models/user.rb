@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
     has_many :pending_friends, -> {where(friendships: {state: 'pending' })}, through: :pending_friendships, source: :friend
 
 
-
+    has_many :group_memberships
+      has_many :groups, :through => :group_memberships
 
 
 
@@ -39,6 +40,10 @@ class User < ActiveRecord::Base
 
   # has_many :stems
   has_many :statuses
+
+  has_many :conversations, :foreign_key => :sender_id
+
+
 
 
 

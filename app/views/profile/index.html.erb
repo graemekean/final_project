@@ -3,35 +3,30 @@
 
 <div class="page-header">
   <h1>All Profiles</h1>
+  <%= link_to "New Profile", new_profile_path %> | 
+
 </div>
 
 
 <% @profiles.each do |profile| %>
-<% @user = profile.user %>
-<div>
-  <strong><%= profile.first_name %></strong>
-  <p>Name: <%= profile.last_name %></p>
-  <p><%= profile.about_me %></p>
+<div class="session-full">
+  <% @user = profile.user %>
+  <br>
+  <ul>
+    <li><strong><%= profile.first_name %></strong></li>
+    <li><p>Name: <%= profile.last_name %></p></li>
+    <li><p><%= profile.about_me %></p></li>
 
-  <%#= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> 
+    <%#= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> 
 
-  <span>
-    <%= link_to "Show", profile %>
-  </span> 
- <br>
- <br>
+    <li><span>
+      <%= link_to "Show", profile %>
+    </span> </li>
+  </ul>
+  <br>
 
 
-
-  <!-- <p><%#= session.user %> -->
 </div>
 <% end %>
-
-    <%= link_to "New Profile", new_profile_path %> | 
-
-
-
-
-<br>
 
 
