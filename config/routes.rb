@@ -43,11 +43,11 @@ Rails.application.routes.draw do
   resources :profile
   resources :statuses
   # resources :friendships
-  resources :friendships do
-    member do
-      put :accept
-    end
-  end
+  resources :friendships #do
+    # member do
+    #   put :accept
+    # end
+  #end
 
   resources :conversations do
     resources :messages

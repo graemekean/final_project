@@ -106,6 +106,13 @@ class ProfileController < ApplicationController
  end
 
  private
+
+
+   def embed(youtube_url)
+     youtube_id = youtube_url.split("=").last
+     content_tag(:iframe, nil, src: "//www.youtube.com/embed/#{youtube_id}")
+   end
+
    # Use callbacks to share common setup or constraints between actions.
    def set_profile
      @user = current_user

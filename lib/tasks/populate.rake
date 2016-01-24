@@ -19,15 +19,15 @@ namespace :db do
       :password => "password")
 
     profile = Profile.create!(:user_id => user.id,
-                            :first_name => Faker::Name.first_name,
-                            :last_name => Faker::Name.last_name,
-                            :primary_discipline => ['Drums', 'Guitar', 'Bass', 'Piano', 'Vocal', 'Synth', 'Production', 'DJ', 'Keys'].sample,
-                            :profile_name => Faker::Name.name,
-                            :youtube_url => 'youtube.com',
+                            :first_name => 'Graeme',
+                            :last_name => 'Kean',
+                            :primary_discipline => 'Drums',
+                            :profile_name => 'The Gen_Rule',
+                            :youtube_url => 'https://www.youtube.com/channel/UCKFNAIWotHMt99SrErdP62Q',
                             :soundcloud_url => 'soundcloud.com',
                             :linkedin_url => 'linked_in.com',
                             :profile_image => '/images/icons/youtube_icon.png',
-                            :profile_video => 'youtube.com',
+                            :profile_video => 'https://www.youtube.com/watch?v=kO8x8eoU3L4',
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
                             :infleunces => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
                             :role => 'registered')
@@ -73,15 +73,15 @@ namespace :db do
       :password => "password")
 
     profile = Profile.create!(:user_id => user.id,
-                            :first_name => Faker::Name.first_name,
-                            :last_name => Faker::Name.last_name,
-                            :primary_discipline => ['Drums', 'Guitar', 'Bass', 'Piano', 'Vocal', 'Synth', 'Production', 'DJ', 'Keys'].sample,
-                            :profile_name => Faker::Name.name,
-                            :youtube_url => 'youtube.com',
+                            :first_name => 'David',
+                            :last_name => "Cunningham",
+                            :primary_discipline => 'Guitar',
+                            :profile_name => 'Logrey',
+                            :youtube_url => 'https://www.youtube.com/channel/UC6Nl1zrmqVpCjdZg8YFU1gQ',
                             :soundcloud_url => 'soundcloud.com',
                             :linkedin_url => 'linked_in.com',
                             :profile_image => '/images/icons/youtube_icon.png',
-                            :profile_video => 'youtube.com',
+                            :profile_video => 'https://www.youtube.com/watch?v=DlNEjnP6Cyo',
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
                             :infleunces => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
                             :role => 'registered')

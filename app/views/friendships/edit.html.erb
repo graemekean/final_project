@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="form-actions">
-  <% if f@riendship.requested? %>
+  <% if @friendship.requested? %>
     <%= simple_form_for @friendship, url: accept_friendship_path(@friendship), method: :put do |form| %>
     <%= f.submit "Accept Friendship", class: 'btn btn-primary'  %>
     <% end %>
