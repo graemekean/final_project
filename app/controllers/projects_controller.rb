@@ -30,7 +30,9 @@ class ProjectsController < ApplicationController
 
   # GET /sessions/1/edit
   def edit
-    raise
+    @user = current_user
+    @studio = current_user.studio
+    @studio.projects << @project
   end
 
   # POST /sessions

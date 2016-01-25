@@ -83,11 +83,10 @@
 </div>
 <% end %>
 
-  <!-- ADD THE USERS PROFILE IMAGE TO THE DOM IF IT EXISTS -->
- 
 
-  
 
+
+<!-- ADD THE USERS PROFILE IMAGE TO THE DOM IF IT EXISTS --> 
 <% if @user.profile.featured_track %>
 <div class="container">
   <div class="row">
@@ -101,16 +100,12 @@
 <% end %>
 
 
-  
 
-
-
-
-
-  
+<!-- IF THE USER HAS ADDED FRIENDS - SHOW A LIST OF THEM -->
+<% if current_user.friends %>
+<div class="container"> 
   <div class="row"> 
-
-    <h4>Friends</h4>
+    <h1>Friends</h1>
     <ul>
       <% @user.friends.each do |friend| %>
       <li>
@@ -119,11 +114,18 @@
           <%= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
           <% end %>
       </li>
+      <% end %>
     </ul>
   </div>
-  <% end %>
+</div>
+<% end %>
 
-  <% if current_user == @user %>
+
+
+
+<!-- IF THE USER HAS FRIEND REQUESTS - SHOW A LIST OF THEM -->
+<% if current_user == @user %>
+<div class="container"> 
   <div class="row">
       <h4>Friend Requests</h4>
       <ul>
@@ -136,19 +138,19 @@
         <% end %>
       </ul>  
   </div>
-  <% end %>
+</div>
+<% end %>
 
 
-  <% if current_user == @user %>
+
+<!-- SHOW THE CURRENT USER'S TIMELINE -->
+<% if current_user == @user %>
+<div class="container"> 
   <div class="row">
     <h2>User Timeline</h2>
-
-  <%# if @user.photos == true %>
     <% @user.statuses.each do |status| %>
-
     <div class="session-full">
-
-      <%= status.content %>
+    <%= status.content %>
 
     <%# if photo.album_id == @album.id %>
     <%#= recipe.name %>
