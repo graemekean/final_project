@@ -10,6 +10,8 @@ gem 'rmagick'
 gem 'faker'
 gem 'to_words'
 gem 'amistad'
+gem 'bootstrap-sass', '~> 3.1.1.0'
+gem 'youtube_it', '~> 2.4.0'
 
 gem 'simple_form'
 # gem 'state_machine'

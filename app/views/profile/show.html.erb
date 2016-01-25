@@ -8,6 +8,13 @@
     </div>
   </div>
 
+  <%=  %> 
+  <% youtube_id = @user.profile.profile_video.split("=").last %>
+  <iframe class="youtube-video" width="560" height="349" src="<%= "http://www.youtube.com/embed/"+youtube_id %>"></iframe>
+
+  <%#= content_tag(:iframe, nil, src: "http://www.youtube.com/embed/#{youtube_id}") %> 
+
+
   <div class='row'>
     <div class="col-md-12">
       <%= link_to image_tag(@profile.profile_image.medium.url), @profile.profile_image.large.url if @profile.profile_image?%> 

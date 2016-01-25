@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
   before_filter :authenticate_user!
-  respond_to :html, :json
+  # respond_to :html, :json
 
   def new
     # @friendship = Friendship.new
@@ -126,6 +126,7 @@ class FriendshipsController < ApplicationController
       # DELETE /friendships/1.json
 
       def destroy
+        raise
         @friendship = Friendship.all.sample
         @friendship.destroy
         respond_to do |format|
@@ -143,7 +144,7 @@ class FriendshipsController < ApplicationController
       private
 
       def params
-        params.require(:friendship).permit(:user_id, :friend_id, :state, :id)
+        params.permit(:user_id, :friend_id, :state, :id)
       end
 
 

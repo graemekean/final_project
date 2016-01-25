@@ -10,7 +10,7 @@
   <% if friendship.pending? %>
     <em>Friendship is pending</em>
     <%= link_to "Delete request", edit_friendship_path(friendship) %>
-    <%= link_to "Delete", friendship, method: :delete, data: {confirm: "Are you sure you want to reject this friendship? "}  %>
+    <%= link_to "Delete", friendship, method: :put, data: {confirm: "Are you sure you want to reject this friendship? "}  %>
   <% end %>
 <br>
   <% if friendship.requested? %>
