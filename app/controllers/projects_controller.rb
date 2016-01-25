@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
 
   # GET /sessions/1/edit
   def edit
+    raise
   end
 
   # POST /sessions
@@ -50,6 +51,13 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /sessions/1
   # PATCH/PUT /sessions/1.json
+
+def add
+
+end
+
+
+
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -67,7 +75,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to studio_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

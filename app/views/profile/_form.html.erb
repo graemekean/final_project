@@ -1,53 +1,87 @@
 
 
-<div class="container edit_user">
+<div class="container">
   <div class="col-md-6 col-md-offset-3">
 
     <% provide(:title, "Edit user Profile") %>
     <h1>Update your profile</h1>
-
+    
 
     <%= simple_form_for(@profile) do |f| %>
     <%#= render 'shared/error_messages' %>
-    <div class="col-md-6">
+   
+    <div class="form-group">
+      <%= f.input :first_name,  class: "form-control", required: true, label: 'Enter your first name', error: 'First name is mandatory, please specify one' %>
+      </div>
+      <div class="form-group">
+      <%= f.input :last_name,  class: "form-control", required: true, label: 'Enter your last name', error: 'Last name is mandatory, please specify one' %>
+      </div>
 
-      <%= f.input :first_name %>
-      <br>
-      <%= f.input :last_name %>
-      <br>
-      <%= f.input :profile_name %>    
-      <br>  
-      <%= f.input :profile_name %>    
-      <br> 
-      <%= f.input :profile_video %>    
-      <br> 
-      <%= f.input :youtube_url %>
-      <br>
-      <%= f.input :soundcloud_url %>
-      <br>
-      <%= f.input :linkedin_url %>
-      <br> 
-      <%= f.label :profile_image, 'Upload a profile picture of yourself:' %><br>
-      <%= f.file_field :profile_image, class: "form-control" %>
-      <%= f.hidden_field :user_id, :value => current_user.id %> 
+      <div class="form-group">
+      <%= f.input :profile_name,  class: "form-control", required: true, label: 'Enter your profile name - this is how your name will appear to other users', error: 'Profile name is mandatory, please specify one' %>   
+      </div>
+
+      <div class="form-group">   
+      <%= f.input :profile_video,  class: "form-control" %>  
+      </div>
+
+      <div class="form-group"> 
+      <%= f.input :youtube_url,  class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+      <%= f.input :soundcloud_url,  class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+      <%= f.input :linkedin_url,  class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+      <%= f.input :featured_track,  class: "form-control" %>
+      </div>
+
+      <div class="form-group"> 
+      <%= f.input :featured_playlist,  class: "form-control" %>
+      </div>
+
+      <div class="form-group"> 
+      <%= f.input :influences,  class: "form-control" %>
+      </div>
+
+      <div class="form-group"> 
+      <%= f.input :genres,  class: "form-control" %>
+      </div>
+
+      <div class="form-group"> 
+      <%= f.input :primary_discipline,  class: "form-control", required: true, label: 'What is your primary discipline?', error: 'For users to be able to find you by your skill - you must enter a primary discipline' %>
+      </div>
      
+      <div class="form-group"> 
+      <%= f.input :city,  class: "form-control", required: true, label: 'Which city are you presently active in?', error: 'Location is mandatory, please specify one' %>
+      </div>
+       
+      <div class="form-group"> 
+      <%= f.label :profile_image, 'Upload a profile picture of yourself:' %>
+      </div>
 
-    </div>
+      <div class="form-group"> 
+      <%= f.file_field :profile_image, class: "form-control" %>
+      </div>
 
-    <div class="col-md-6">
-      <%= f.input :about_me %>
+      <div class="form-group"> 
+      <%= f.hidden_field :user_id, :value => current_user.id %> 
+      </div>
+      
 
-    </div>
-
-
-
-
-    
-
-
-
-    <%= f.submit "Save changes", class: "btn btn-primary" %>
-    <% end %>
+      <div class="form-group"> 
+      <%= f.input :about_me,  class: "form-control" %>
+      </div>
+      
+      <div class="form-group"> 
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+      </div>
+      <% end %>
 
 
   </div>

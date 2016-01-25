@@ -1,224 +1,170 @@
 
+<div class='container'>
 
-<div class='container-fluid'>
-  <!-- <div class="row"> -->
-  <div class='row'>
-    <div class="col-md-12"
-    <h2><%= @user.profile.profile_name %></h2>
-    </div>
-  </div>
-
-  <%=  %> 
-  <% youtube_id = @user.profile.profile_video.split("=").last %>
-  <iframe class="youtube-video" width="560" height="349" src="<%= "http://www.youtube.com/embed/"+youtube_id %>"></iframe>
-
-  <%#= content_tag(:iframe, nil, src: "http://www.youtube.com/embed/#{youtube_id}") %> 
 
 
   <div class='row'>
-    <div class="col-md-12">
-      <%= link_to image_tag(@profile.profile_image.medium.url), @profile.profile_image.large.url if @profile.profile_image?%> 
-    </div>
-  </div>
-
-  <div class="row"></div>
     <div class="col-md-6">
-      <!-- <%#= link_to image_tag("/icons/soundcloud_icon.png"), @profile.soundcloud_url.to_s %>  -->
-      <%= link_to image_tag("/images/icons/soundcloud_icon.png", class: "icon"), image_path("http://#{@profile.soundcloud_url}"), class: "colorbox" %>
+      <h1><%= @user.profile.profile_name %></h1>
+          <% unless current_user == @user %>
+            <div class="btn-group">
 
-      <%= link_to image_tag("/images/icons/youtube_icon.png", class: "icon"), image_path("http://#{@profile.youtube_url}"), class: "colorbox" %>
 
-        <%#= link_to "Soundcloud", "http://www.soundcloud.com", :target => "_blank" %>
+            <%= link_to 'Add Friend', friendships_path(:friend_id => @user), :method => :post, :class => "btn btn-primary" %>
+
+
+            <%= link_to 'Message me', conversations_path(sender_id: current_user.id, recipient_id: @profile.user.id), :method => :post, :class => "btn btn-warning" %>
+
+
+
+              <%#= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
+              <%#= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: @profile.user.id), method: 'post'%>
+              </div>
+          <% end %>
+
+      <h4>Name: <%= @profile.first_name %> <%= @profile.last_name %></h4>
+          <!-- <h4>Profile Name: <%#= @profile.profile_name %></h4>   -->
+          <h4>Primary skill: <%= @profile.primary_discipline %></h4>
+          <h4>About Me: </h4>
+          <p><%= @profile.about_me %></p>
+
+          <!-- <h5>Role on site: <%#= @profile.role %></h5>   -->
+          <h5>Musical Infleunces: <%= @profile.influences %></h5>
+          <h5>Genres I like: <%= @profile.genres %></h5>
+          <!-- <h5>Youtube channel: <%#= @profile.youtube_url %></h5> -->
+          <!-- <h5>Soundcloud Stream: <%#= @profile.soundcloud_url %></h5> -->
+          <h5>Location: <%= @profile.city %></h5>
+          <!-- <h5>Featured Track: <%#= @profile.featured_track %></h5> -->
+         
+
+      <!-- ADD LINKS FOR USERS YOUTUBE AND SOUNDCLOUD CHANNELS IF THEY EXIST -->
+
+          <h5>Check me out on :</h5>
+          <% if @user.profile.youtube_url %>
+          <!-- STRIP YOUTUBE CHANNEL URL BACK TO THE CHANNEL ID -->
+            <% youtube_channel = @user.profile.youtube_url.split("/").last %>
+            <!-- ADD LINK TO YOUTUBE CHANNEL -->
+            <%= link_to image_tag("/images/icons/youtube_icon.png", class: "icon"), image_path("http://www.youtube.com/channel/#{youtube_channel}"), class: "colorbox" %>
+          <% end %>
+
+          <% if @user.profile.soundcloud_url %>
+          <!-- STRIP THE URL FROM THE DATABASE IN CASE THE USER HAS ADDED THE FULL LINK -->
+          <% soundcloud_stream = @user.profile.soundcloud_url.split("/").last %>
+            <%= link_to image_tag("/images/icons/soundcloud_icon.png",  class: "icon"), image_path("http://www.soundcloud.com/#{soundcloud_stream}") %>
+          <% end %>
+          
     </div>
-  </div>
-</div>
+    <br>
 
-<div class='col-md-12' style="padding-top:40px;">
-
-
-  <%# if @user.gender == "Male" %>
-  <%#= image_tag("/icons/male.png") %>
-  <%# else %>
-  <%#= image_tag("/icons/female.png") %>
-  <%# end %>
-
-  <div class="col-md-9" style="text-align:left; padding-top:15px;">
-    <p>First Name: <%= @profile.first_name %></p>
-    <p>Last name: <%= @profile.last_name %></p>
-    <p>Profile Name: <%= @profile.profile_name %></p>  
-    <p>Primary skill: <%= @profile.primary_discipline %></p>
-
-    <p>Role on site: <%= @profile.role %></p>  
-    <p>Musical Infleunces: <%= @profile.infleunces %></p>
-    <p>Genres I like: <%= @profile.genres %></p>
-    <p>Youtube channel: <%= @profile.youtube_url %></p>
-    <p>Soundcloud Stream: <%= @profile.soundcloud_url %></p>
-         <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: @profile.user.id), method: 'post'%>
-
-
-
-  </div>
-  <div class="col-md-12" style="text-align:left;" >
-    <p>About Me:</p>
-    <p><%= @profile.about_me %></p>
-  </div>
-  <% if current_user == @user %>
-  <div class="col-md-12" style="text-align:right;" >
-    <%= link_to("Edit My Profile", edit_profile_path(@user), class: "btn btn-primary") %>
-            <li><%= link_to "Cancel my Account", cancel_user_registration_path %> </li>
-    
-  </div>
-  <% end %>
-
+    <% if @user.profile.profile_image %>
+    <div class="col-md-6">
+          <%= link_to image_tag(@profile.profile_image.medium.url, class: "img-responsive"), @profile.profile_image.large.url %> 
+    </div>
+    <% end %>
 
 </div>
 
 
-<%#= @user.toggle_follow!(@user) %>
 
-<% unless current_user == @user %>
-<%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+
+  <!-- ADD THE PROFILE_VIDEO IF THERE IS ONE -->
+
+<% if @user.profile.profile_video %>
+<h1> Featured Video </h1>
+<div class="container"></div>
+    <div class='col-md-12'>
+      <div class="embed-responsive embed-responsive-16by9">
+      <!-- STRIP EVERYTHING BEFORE THE VIDEO ID -->
+        <% youtube_id = @user.profile.profile_video.split("=").last %>
+        <!-- ADD THE VIDEO THE THE DOM WITH THE REQUIRED ID -->
+        <iframe class="embed-responsive-item" src="<%= "http://www.youtube.com/embed/"+youtube_id %>"></iframe>
+      </div>
+    </div>
+</div>
 <% end %>
 
-</div>
-</div>
+  <!-- ADD THE USERS PROFILE IMAGE TO THE DOM IF IT EXISTS -->
+ 
 
+  
 
-
-<%# if current_user == @user %>
-<!-- <div class="col-md-12"> -->
-<!-- <h4>Friend Requests</h4> -->
-<%# if @user.requested_friendships == true %>
-
-<%# @user.requested_friendships.each do |request| %>
-<!-- <div class="col-md-12"> -->
-
-<%#= image_tag(request.profile_image.thumb.url) if request.profile_image %>
-<%#= request.name %> <!-- would like to be friends -->
-<%#= link_to "Accept", friendship_path(:id => request), :method => "put", class: "btn btn-primary" %> 
-<%#= link_to "Decline", friendship_path(:id => request), :method => :delete, class: "btn btn-danger"  %>
-
-<!-- </div> -->
-<%# end %>
-
-<%# else %>
-<!-- <p>You have no pending friend requests</p> -->
-<%# end %>
-<!-- </div> -->
-<%# end %>
-
-
+<% if @user.profile.featured_track %>
 <div class="container">
-  <div class="col-md-12">
-    <h2>Friends</h2>
+  <div class="row">
+  <h1>Featured Track</h1>
+  <% @track = @user.profile.featured_track %>
+    <div class="col-md-12">      
+        <iframe width="100%" height="120" scrolling="no" frameborder="no" src="<%= "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/"+@track+"&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true" %>"></iframe>
+    </div>
   </div>
-
-  <%# if @user.friends == true %>
-  <% @user.friends.each do |friend| %>
-  <div class="col-md-2">
-
-
-    <%#= link_to image_tag(friend.profile_image.thumb.url), friend.profile_image.original.url if friend.profile_image?%> 
-  </div>
-  <%= friend.email %> 
-  <%#= friend.send_message %> 
-
-  <%# if current_user == @user %>
-  <%#= link_to "Remove", friendship_path(:id => friend), :method => :delete, class: "btn btn-danger" %>
-  <%# end %>
-
-  <% end %>
-  <%# else %>
-  <!-- <p>user has not added any friends</p> -->
-  <%# end %>
 </div>
+<% end %>
+
+
+  
 
 
 
-<!-- <div class="row"> -->
-<div class="col-md-12">
 
-  <h2>User Timeline</h2>
+
+  
+  <div class="row"> 
+
+    <h4>Friends</h4>
+    <ul>
+      <% @user.friends.each do |friend| %>
+      <li>
+        <%= friend.email %> 
+          <% if current_user == @user %>
+          <%= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
+          <% end %>
+      </li>
+    </ul>
+  </div>
+  <% end %>
+
+  <% if current_user == @user %>
+  <div class="row">
+      <h4>Friend Requests</h4>
+      <ul>
+        <% @user.requested_friendships.each do |request| %>
+        <li>
+          <%= request.email %> 
+          <%= link_to "Accept", friendship_path(:id => request), :method => "put" %> 
+          <%= link_to "Decline", friendship_path(:id => request), :method => :delete %>
+        </li>
+        <% end %>
+      </ul>  
+  </div>
+  <% end %>
+
+
+  <% if current_user == @user %>
+  <div class="row">
+    <h2>User Timeline</h2>
 
   <%# if @user.photos == true %>
-  <% @user.statuses.each do |status| %>
+    <% @user.statuses.each do |status| %>
 
-  <div class="col-md-3 user_timeline">
+    <div class="session-full">
 
-    <%= status.content %>
+      <%= status.content %>
 
     <%# if photo.album_id == @album.id %>
     <%#= recipe.name %>
     <%#= link_to(photo.title, photo_path(photo)) %>
     <%#= link_to image_tag(photo.photo_image.medium.url), photo.photo_image.original.url if photo.photo_image? == true %>  
-  </div> 
-  <% end %>
+    </div> 
+    <% end %>
   <%# else %>
   <!-- <p>User has not uploaded any photos</p> -->
-  <%# end %>
 </div>
-<!-- </div> -->
-
-<%# render current_user.mailbox.inbox %>
-
-</div>
-<div class="container">
-  <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav pull-right">
-      <% if user_signed_in? %>
-      <li><%= link_to "Hello, #{current_user.email}", "#" %></li>
-      <li><%#= link_to "Inbox", mailbox_inbox_path %></li>
-      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-      <% else %>
-      <li class="active"><%= link_to "Login", new_user_session_path %></li>
-      <li><%= link_to "Sign up", new_user_registration_path %></li>
-      <% end %>
-    </ul>
-  </div>
+<% end %>
 
 
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First Name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last Name:</strong>
-  <%= @profile.last_name %>
-</p>
-
-<p>
-  <strong>Profile Name:</strong>
-  <%= @profile.profile_name %>
-</p>
-
-<p>
-  <strong>User_id:</strong>
-  <%= @profile.user_id %>
-</p>
--->
 
 
 
 
 <%#= link_to 'Profile', profile_path(current_user) %> |
-<%= link_to 'Back', profile_path %>
+<%= link_to 'Back', profile_path(@user) %>

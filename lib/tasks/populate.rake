@@ -186,7 +186,7 @@ namespace :db do
       user = User.all.sample
       friendship = Friendship.new(:user_id =>  user.id ,
                                   :friend_id => User.all.sample.id,
-                                  :state => ['accepted', 'pending', 'requested'].sample)
+                                  :approved => [true, false].sample)
       user.friendships << friendship
 
 
@@ -208,10 +208,11 @@ namespace :db do
     1000.times do |c|
       user = User.all.sample
       project = user.projects.all.sample
-      comment = Comment.create!(:title =>  user.id ,
+      comment = Comment.create!(:title => Faker::Hacker.adjective,
                                 :content => Faker::Lorem.paragraph,
                                 :commentable_id => project.id,
-                                :commentable_type => 'project')
+                                :commentable_type => 'project',
+                                :user_id => user.id)
 
       project.comments << comment
       
@@ -225,7 +226,8 @@ namespace :db do
       comment = Comment.create!(:title =>  user.id ,
                                 :content => Faker::Lorem.paragraph,
                                 :commentable_id => status.id,
-                                :commentable_type => 'status')
+                                :commentable_type => 'status',
+                                :user_id => user.id)
 
       status.comments << comment
       

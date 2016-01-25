@@ -19,9 +19,19 @@
  }
 
  .icon {
-  width:100px;
+  width: auto;
+  height: 50px;
+ }
 
+
+ .img-responsive {
+  max-width: 100%;
   height:auto;
+  /*max-height: 500px;*/
+  /*display: block;*/
+  display: center-block;
+
+
  }
 
  

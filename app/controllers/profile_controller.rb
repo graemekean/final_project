@@ -126,8 +126,7 @@ class ProfileController < ApplicationController
    # end
 
    def profile_params
-    params.require(:profile).permit(:user_id, :name, :email, :password, :first_name, :last_name, :profile_name,
-      :password_confirmation, :youtube_url, :linkedin_url, :role, :profile_image, :profile_video, :about_me, :primary_skill, :twitter_feed, :soundcloud_url)
+    params.require(:profile).permit(:user_id, :name, :email, :password, :first_name, :last_name, :profile_name, :city, :password_confirmation, :youtube_url, :linkedin_url, :role, :profile_image, :profile_video, :about_me, :primary_discipline, :twitter_feed, :soundcloud_url, :featured_track)
     end
 
 

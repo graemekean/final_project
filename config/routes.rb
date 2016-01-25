@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :posts
 
   get 'mixer/show'
+  
 
   get 'statuses/index'
 
@@ -43,7 +44,8 @@ Rails.application.routes.draw do
   resources :profile
   resources :statuses
   # resources :friendships
-  resources :friendships #do
+  resources :friendships
+   #do
     # member do
     #   put :accept
     # end
@@ -78,6 +80,8 @@ Rails.application.routes.draw do
   # get 'stem/show'
   # get 'stem/edit'
   # get 'stem/delete'
+
+  resources :videos, only: [:index, :new, :create]
 
  
 

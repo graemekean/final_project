@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125010427) do
+ActiveRecord::Schema.define(version: 20160125120119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160125010427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "state"
+    t.boolean  "approved"
   end
 
   add_index "friendships", ["state"], name: "index_friendships_on_state", using: :btree
@@ -124,11 +125,13 @@ ActiveRecord::Schema.define(version: 20160125010427) do
     t.integer  "user_id"
     t.string   "soundcloud_url"
     t.string   "linkedin_url"
-    t.string   "infleunces"
+    t.string   "influences"
     t.string   "genres"
     t.string   "role"
     t.string   "primary_discipline"
     t.string   "city"
+    t.string   "featured_track"
+    t.string   "featured_playlist"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -154,6 +157,8 @@ ActiveRecord::Schema.define(version: 20160125010427) do
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "video"
+    t.string   "sound"
   end
 
   create_table "stems", force: :cascade do |t|

@@ -4,22 +4,36 @@
 
 <h1>cycle through user friendships and return each friend</h1>
 
-<% @friendships.each do |friendship| %>
-  <% friend = friendship.friend %>
-  <%= friend.email %>
-  <% if friendship.pending? %>
-    <em>Friendship is pending</em>
-    <%= link_to "Delete request", edit_friendship_path(friendship) %>
-    <%= link_to "Delete", friendship, method: :put, data: {confirm: "Are you sure you want to reject this friendship? "}  %>
+<div class="col-md-12">
+
+  <% unless current_user == @user %>
+  <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
   <% end %>
-<br>
-  <% if friendship.requested? %>
-    <em>Friendship requested</em>
-    <%= link_to "Accept friendship", edit_friendship_path(friendship) %>
+
+  <h4>Friends</h4>
+  <ul>
+    <% @user.friends.each do |friend| %>
+    <li>
+      <%= friend.email %> 
+      <% if current_user == @user %>
+      <%= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
+    <% end %>
+    </li>
+    <% end %>
+  </ul>
+
+  <% if current_user == @user %>
+    <h4>Friend Requests</h4>
+    <ul>
+      <% @user.requested_friendships.each do |request| %>
+      <li>
+        <%= request.email %> 
+        <%= link_to "Accept", friendship_path(:id => request), :method => "put" %> 
+        <%= link_to "Decline", friendship_path(:id => request), :method => :delete %>
+      </li>
+      <% end %>
+    </ul>
   <% end %>
-<br>
-  <% if friendship.accepted? %>
-    <em>Friendship Started: <%= friendship.updated_at %>.</em>
-    <%= link_to "Update friendship", edit_friendship_path(friendship) %>
-  <% end %>
-<% end %>
+</div>
+
+

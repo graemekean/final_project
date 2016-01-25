@@ -10,14 +10,17 @@ class User < ActiveRecord::Base
   # create join table association for friendships to associate a user with another user
 
     has_many :friendships
-    has_many :friends, -> {where(friendships: {state: 'accepted' })}, through: :friendships 
+        has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+
+        has_many :active_friends, -> { where(friendships: { approved: true}) }, :through => :friendships, :source => :friend
+        has_many :passive_friends, -> { where(friendships: { approved: true}) }, :through => :passive_friendships, :source => :user
+        has_many :pending_friends, -> { where(friendships: { approved: false}) }, :through => :friendships, :source => :friend
+        has_many :requested_friendships, -> { where(friendships: { approved: false}) }, :through => :passive_friendships, :source => :user
 
 
-
-
-
-    has_many :pending_friendships, class_name: 'Friendship', foreign_key: :user_id
-    has_many :pending_friends, -> {where(friendships: {state: 'pending' })}, through: :pending_friendships, source: :friend
+        def friends
+          active_friends | passive_friends
+        end
 
 
     has_many :group_memberships
@@ -35,6 +38,7 @@ class User < ActiveRecord::Base
 
   # stem_id project_id - need a join table to associate stems to projects
 
+  # has_many :comments, through: :commentable
   
 
 
