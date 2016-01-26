@@ -37,6 +37,9 @@ class StatusesController < ApplicationController
     # @statuses = user.statuses.all
     @status = Status.find(params[:id])
     @user = @status.user
+    @commentable = @status
+    @comments = @commentable.comments
+    @comment = Comment.new
 
 
 

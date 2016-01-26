@@ -15,6 +15,14 @@ class ProfileController < ApplicationController
  def show
    # @user = User.find(params[:id])
    @profile = Profile.find(params[:id])
+   # @commentable = @status
+   # @comments = @commentable.comments
+   # @comment = Comment.new
+   # @commentable = @status
+   # @commentable = "status"
+
+   # @comments = @commentable.comments
+   @comment = Comment.new
 
    @user = @profile.user
    # @profile = @user.profile

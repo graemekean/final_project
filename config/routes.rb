@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   
 
-  get 'comment/show'
+  # get 'comment/show'
 
-  get 'comment/edit'
+  # get 'comment/edit'
 
-  get 'comment/index'
+  # get 'comment/index'
 
-  get 'comment/new'
+  # get 'comment/new'
+
+  # resources :comments
 
   resources :posts
 
@@ -40,9 +42,15 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :stems
+    resources :comments
   end
+
   resources :profile
-  resources :statuses
+
+  resources :statuses do
+    resources :comments
+  end
+
   # resources :friendships
   resources :friendships
    #do
@@ -57,7 +65,12 @@ Rails.application.routes.draw do
 
   resources :groups
 
-  resources :stems
+  resources :stems do
+    resources :comments
+  end
+
+
+
   resources :studio
 
   # get 'studios/index'

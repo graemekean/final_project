@@ -1,0 +1,89 @@
+<!-- SHOW THE CURRENT USER'S TIMELINE -->
+<%# if current_user == @user %>
+<div class="container"> 
+  <div class="row">
+    <h4>User Timeline</h4>
+
+    <% id = 1 %>
+    <% collapse = '' %>
+    <% property = 'in' %>
+
+    <%# @groups.each do |group| %>
+
+  
+
+
+    <% @user.statuses.each do |status| %>
+
+    <% @text = id %>
+
+
+    <div class="session-full">
+      <div class="container">
+        <div class="col-md-2">
+            <% if status.user.profile.profile_image? %>
+              <%= link_to image_tag(@profile.profile_image.thumb.url, class: "img-responsive"), @profile.profile_image.large.url %> 
+            <% else %>
+              <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), "/images/profiles/user-thumb.png" %> 
+            <% end %>
+        </div>
+        <div class="col-md-10">
+            <%= status.content %>
+        </div>
+
+
+
+<!-- SECTION TO CONTAIN THE COMMENTS FOR THE STATUS -->
+
+
+
+
+
+<% if status.comments.count > 0 %>
+        <div class="col-md-12">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading<%= @text.to_s %>">
+                <h4 class="panel-title">
+                  <a class="<%= collapse %>" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= @text.to_s %>" aria-expanded="true" aria-controls="collapse<%= @text.to_s %>">
+                    <h5><%= status.comments.count %> Comments. </h5>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse<%= @text.to_s %>" class="panel-collapse collapse <% property %>" role="tabpanel" aria-labelledby="heading<%= @text.to_s %>">
+                <div class="panel-body">
+                <% status.comments.each do |comment| %>
+                <div class="session-full">
+                <% @commenter = User.find(comment.user_id) %>
+                  <h5><%= @commenter.profile.profile_name %></h5>
+                  <p><%= comment.content %></p>
+                  <p><%= "created " + time_ago_in_words(comment.created_at) + " ago" %> </p> 
+
+                  <%# if @commenter.profile.profile_image? %>
+                    <%#= link_to image_tag(@commenter.profile_image.thumb.url, class: "img-responsive"), @commenter.profile.profile_image.large.url %> 
+                  <%# else %>
+                    <%#= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), "/images/profiles/user-thumb.png" %> 
+                  <%# end %>
+
+
+                  <br>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<% end %>
+
+
+
+
+
+
+      </div>
+    </div>
+    <% id += 1 %>
+    <% end %>
+  </div>
+</div>

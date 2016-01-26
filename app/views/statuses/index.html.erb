@@ -2,8 +2,17 @@
 
 <% if user_signed_in? %>
 <div class="page-header">
-  <h1>Listing Statuses</h1>
+  <h1>My Activity Feed</h1>
 </div>
+
+
+<% if @user.requested_friendships.count > 0 %>
+<%= render 'friend_requests' %>
+<% end %>
+
+<%= render 'activity_feed' %>
+
+
 
 
 

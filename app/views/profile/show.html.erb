@@ -3,11 +3,13 @@
 
 
 
-  <div class='row'>
+  <div class='row session-full'>
     <div class="col-md-6">
+      <div class="page-header">
       <h1><%= @user.profile.profile_name %></h1>
+      </div>
           <% unless current_user == @user %>
-            <div class="btn-group">
+            <div class="btn-toolbar">
 
 
             <%= link_to 'Add Friend', friendships_path(:friend_id => @user), :method => :post, :class => "btn btn-primary" %>
@@ -22,10 +24,11 @@
               </div>
           <% end %>
 
-      <h4>Name: <%= @profile.first_name %> <%= @profile.last_name %></h4>
+          <h4>Name: <%= @profile.first_name %> <%= @profile.last_name %></h4>
           <!-- <h4>Profile Name: <%#= @profile.profile_name %></h4>   -->
-          <h4>Primary skill: <%= @profile.primary_discipline %></h4>
+          <h4>Title: <%= @profile.primary_discipline %></h4>
           <h4>About Me: </h4>
+          <h4>Location: <%= @profile.city %></h4>
           <p><%= @profile.about_me %></p>
 
           <!-- <h5>Role on site: <%#= @profile.role %></h5>   -->
@@ -33,7 +36,6 @@
           <h5>Genres I like: <%= @profile.genres %></h5>
           <!-- <h5>Youtube channel: <%#= @profile.youtube_url %></h5> -->
           <!-- <h5>Soundcloud Stream: <%#= @profile.soundcloud_url %></h5> -->
-          <h5>Location: <%= @profile.city %></h5>
           <!-- <h5>Featured Track: <%#= @profile.featured_track %></h5> -->
          
 
@@ -56,11 +58,16 @@
     </div>
     <br>
 
-    <% if @user.profile.profile_image %>
+
+    
     <div class="col-md-6">
+        <% if @user.profile.profile_image? %>
           <%= link_to image_tag(@profile.profile_image.medium.url, class: "img-responsive"), @profile.profile_image.large.url %> 
+        <% else %>
+          <%= link_to image_tag("profiles/user-medium.jpg", class: "img-responsive"), "/images/profiles/user-medium.jpg" %> 
+          <%#= path_to_image("profiles/user-medium.jpg", class: "img-respnsive") %>
+        <% end %>
     </div>
-    <% end %>
 
 </div>
 
@@ -69,10 +76,11 @@
 
   <!-- ADD THE PROFILE_VIDEO IF THERE IS ONE -->
 
-<% if @user.profile.profile_video %>
-<h1> Featured Video </h1>
+<% if @user.profile.profile_video? %>
+<h4> Featured Video </h4>
 <div class="container"></div>
-    <div class='col-md-12'>
+  <div class=" row session-full"></row>
+    <div class='col-md-8 col-md-offset-2'>
       <div class="embed-responsive embed-responsive-16by9">
       <!-- STRIP EVERYTHING BEFORE THE VIDEO ID -->
         <% youtube_id = @user.profile.profile_video.split("=").last %>
@@ -80,6 +88,7 @@
         <iframe class="embed-responsive-item" src="<%= "http://www.youtube.com/embed/"+youtube_id %>"></iframe>
       </div>
     </div>
+  </div>
 </div>
 <% end %>
 
@@ -87,10 +96,10 @@
 
 
 <!-- ADD THE USERS PROFILE IMAGE TO THE DOM IF IT EXISTS --> 
-<% if @user.profile.featured_track %>
+<% if @user.profile.featured_track? %>
 <div class="container">
-  <div class="row">
-  <h1>Featured Track</h1>
+  <div class="row session-full">
+  <h4>Featured Track</h4>
   <% @track = @user.profile.featured_track %>
     <div class="col-md-12">      
         <iframe width="100%" height="120" scrolling="no" frameborder="no" src="<%= "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/"+@track+"&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true" %>"></iframe>
@@ -102,19 +111,28 @@
 
 
 <!-- IF THE USER HAS ADDED FRIENDS - SHOW A LIST OF THEM -->
-<% if current_user.friends %>
+<% if current_user.friends.count > 0 %>
 <div class="container"> 
-  <div class="row"> 
-    <h1>Friends</h1>
+  <div class="row session-full"> 
+    <h4>Friends</h4>
     <ul>
-      <% @user.friends.each do |friend| %>
-      <li>
-        <%= friend.email %> 
-          <% if current_user == @user %>
-          <%= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
-          <% end %>
-      </li>
-      <% end %>
+    <% @user.friends.each do |friend| %>
+          <div class="col-md-3 session-full">
+            
+              <p><%= friend.email %> </p>
+              <p><%= friend.profile.primary_discipline %></p>
+              <p><%= friend.profile.city %></p>
+
+              
+              
+
+              <% if current_user == @user %>
+              <%#= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
+              <% end %>
+            
+        </div>
+
+        <% end %>
     </ul>
   </div>
 </div>
@@ -144,23 +162,98 @@
 
 
 <!-- SHOW THE CURRENT USER'S TIMELINE -->
-<% if current_user == @user %>
+<%# if current_user == @user %>
 <div class="container"> 
   <div class="row">
-    <h2>User Timeline</h2>
-    <% @user.statuses.each do |status| %>
-    <div class="session-full">
-    <%= status.content %>
+    <h4>User Timeline</h4>
 
-    <%# if photo.album_id == @album.id %>
-    <%#= recipe.name %>
-    <%#= link_to(photo.title, photo_path(photo)) %>
-    <%#= link_to image_tag(photo.photo_image.medium.url), photo.photo_image.original.url if photo.photo_image? == true %>  
-    </div> 
-    <% end %>
-  <%# else %>
-  <!-- <p>User has not uploaded any photos</p> -->
-</div>
+    <% id = 1 %>
+    <% collapse = '' %>
+    <% property = 'in' %>
+
+    <%# @groups.each do |group| %>
+
+  
+
+
+    <% @user.statuses.each do |status| %>
+
+    <% @text = id %>
+
+
+    <div class="session-full">
+      <div class="container">
+        <div class="col-md-2">
+            <% if status.user.profile.profile_image? %>
+              <%= link_to image_tag(@profile.profile_image.thumb.url, class: "img-responsive"), @profile.profile_image.large.url %> 
+            <% else %>
+              <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), "/images/profiles/user-thumb.png" %> 
+            <% end %>
+        </div>
+        <div class="col-md-10">
+            <%= status.content %>
+        </div>
+
+
+
+<!-- SECTION TO CONTAIN THE COMMENTS FOR THE STATUS -->
+
+
+
+
+
+<% if status.comments.count > 0 %>
+        <div class="col-md-12">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading<%= @text.to_s %>">
+                <h4 class="panel-title">
+                  <a class="<%= collapse %>" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= @text.to_s %>" aria-expanded="true" aria-controls="collapse<%= @text.to_s %>">
+                    <h5><%= status.comments.count %> Comments. </h5>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse<%= @text.to_s %>" class="panel-collapse collapse <% property %>" role="tabpanel" aria-labelledby="heading<%= @text.to_s %>">
+                <div class="panel-body">
+                <% @commentable = @status %>
+                <% status.comments.each do |comment| %>
+                <div class="session-full">
+                <% @commenter = User.find(comment.user_id) %>
+                  <h5><%= @commenter.profile.profile_name %></h5>
+                  <p><%= comment.content %></p>
+                  <p><%= "created " + time_ago_in_words(comment.created_at) + " ago" %> </p> 
+
+                  <% if @commenter.profile.profile_image? %>
+                    <%= link_to image_tag(@commenter.profile_image.thumb.url, class: "img-responsive"), @commenter.profile.profile_image.large.url %> 
+                  <% else %>
+                    <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), "/images/profiles/user-thumb.png" %> 
+                  <% end %>
+                  <p><%= link_to "New Comment", [:new, status, :comment] %></p>
+                  <p><%= link_to "Add Comment", new_status_comment_path(status) %></p>
+
+
+
+                <%#= render 'comments/form' %>
+
+                                
+
+
+
+
+
+
+
+
+
+
+                  <br>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 <% end %>
 
 
@@ -168,5 +261,27 @@
 
 
 
+      </div>
+    </div>
+    <% id += 1 %>
+    <% end %>
+  </div>
+</div>
+
+
+<h1>TIMELINE FROM PARTIAL</h1>
+
+<%= render 'timeline' %>
+
+
+
+
+<%# end %>
+
+
+
+
+
+
 <%#= link_to 'Profile', profile_path(current_user) %> |
-<%= link_to 'Back', profile_path(@user) %>
+<%#= link_to 'Back', profile_path(@user) %>

@@ -21,16 +21,17 @@ namespace :db do
     profile = Profile.create!(:user_id => user.id,
                             :first_name => 'Graeme',
                             :last_name => 'Kean',
-                            :primary_discipline => 'Drums',
+                            :primary_discipline => 'Drummer',
                             :profile_name => 'The Gen_Rule',
                             :youtube_url => 'https://www.youtube.com/channel/UCKFNAIWotHMt99SrErdP62Q',
                             :soundcloud_url => 'soundcloud.com',
                             :linkedin_url => 'linked_in.com',
-                            :profile_image => '/images/icons/youtube_icon.png',
+                            #:profile_image => '',
                             :profile_video => 'https://www.youtube.com/watch?v=kO8x8eoU3L4',
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
-                            :infleunces => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
-                            :role => 'registered')
+                            :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
+                            :role => 'registered',
+                            :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample)
 
     user.profile = profile
 
@@ -80,11 +81,12 @@ namespace :db do
                             :youtube_url => 'https://www.youtube.com/channel/UC6Nl1zrmqVpCjdZg8YFU1gQ',
                             :soundcloud_url => 'soundcloud.com',
                             :linkedin_url => 'linked_in.com',
-                            :profile_image => '/images/icons/youtube_icon.png',
+                            #:profile_image => '/images/icons/youtube_icon.png',
                             :profile_video => 'https://www.youtube.com/watch?v=DlNEjnP6Cyo',
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
-                            :infleunces => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
-                            :role => 'registered')
+                            :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
+                            :role => 'registered',
+                            :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample)
 
     user.profile = profile
 
@@ -137,12 +139,12 @@ namespace :db do
                                 :youtube_url => 'youtube.com',
                                 :soundcloud_url => 'soundcloud.com',
                                 :linkedin_url => 'linked_in.com',
-                                :profile_image => '/images/icons/youtube_icon.png',
+                                #:profile_image => '/images/icons/youtube_icon.png',
                                 :profile_video => 'youtube.com',
                                 :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
-                                :infleunces => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
+                                :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
                                 :role => 'registered',
-                                :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee'].sample)
+                                :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample)
 
         user.profile = profile
 
@@ -222,7 +224,7 @@ namespace :db do
 
     1000.times do |c|
       user = User.all.sample
-      status = user.statuses.all.sample
+      status = Status.all.sample
       comment = Comment.create!(:title =>  user.id ,
                                 :content => Faker::Lorem.paragraph,
                                 :commentable_id => status.id,
