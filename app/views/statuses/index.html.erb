@@ -6,6 +6,14 @@
 </div>
 
 
+  <% @user.conversations.each do |conversation| %>
+    <% if conversation.messages.where(:read => false).any? %>
+      <h4>You have an unread message from: <%= conversation.recipient.profile.profile_name %> <%= link_to "Read", conversations_path(conversation) %></h4>
+
+    <% end %>
+  <% end %>
+
+
 <% if @user.requested_friendships.count > 0 %>
 <%= render 'friend_requests' %>
 <% end %>

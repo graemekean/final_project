@@ -25,16 +25,19 @@
           <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), conversation_messages_path(conversation) %> 
         <% end %>
       </div>
-      <div class="col-md-10"> 
-          <h5><%= link_to recipient.profile.first_name, conversation_messages_path(conversation)%></h5>
-          <h4>Last Message in this conversation</h4>
-          <p><em><%= conversation.messages.last.user.profile.profile_name %> : </em><strong><%= conversation.messages.last.body %></strong></p>
-          <br>
-          <h5><%= link_to "Show coversation", conversation_messages_path(conversation)%></h5>
 
+      <div class="col-md-10"> 
+          <h5><%= link_to recipient.profile.profile_name, conversation_messages_path(conversation)%></h5>
+          <h6>Last Message in this conversation</h6>
+          <p><em><%= conversation.messages.last.user.profile.profile_name %> : </em><strong><%= conversation.messages.last.body %></strong></p>
+          <h5><%= link_to "Show coversation", conversation_messages_path(conversation)%></h5>
       </div>
+
     <% end %>
+ 
+  </div>
   <% end %>
 </div>
+
 
 
