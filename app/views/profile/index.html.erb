@@ -3,10 +3,10 @@
 
 <div class="session-full">
   <h1>All Profiles</h1>
-
+  <em> You can search for users by name, primary_discipline (eg. "guitar") or by city in the box below. </em>
   <%= form_tag(profile_index_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Profiles" %>
-  <%= submit_tag "Search" %>
+  <%= submit_tag "Search" %> 
   <% end %>
 
   <%#= link_to "New Profile", new_profile_path %> 
@@ -28,12 +28,19 @@
         <% end %>
       </div>
 
-      <div class="col-md-10"> 
-        <strong><%= profile.first_name %></strong>
-        <p>Name: <%= profile.last_name %></p>
-        <p><%= profile.about_me %></p>
-        <p><%= link_to "Show", profile %></p>
+      <div class="col-md-4"> 
+
+
+         <strong><h5><%= link_to (profile.profile_name), profile_path(profile) %></h5>
+          
+        <p>Discipline: <%= profile.primary_discipline %></p>
+        <p>City: <%= profile.city %></p>
+        <p>Genres: <%= profile.genres %> </p></strong>
         <%#= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> 
+      </div>
+      <div class="col-md-6">
+      <h5>About Me</h5>
+        <%= profile.about_me %>
       </div>
     </div>
 <% end %>

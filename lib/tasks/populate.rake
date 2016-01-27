@@ -28,12 +28,13 @@ namespace :db do
                             :youtube_url => 'https://www.youtube.com/channel/UCKFNAIWotHMt99SrErdP62Q',
                             :soundcloud_url => 'soundcloud.com',
                             :linkedin_url => 'linked_in.com',
-                            :profile_image => "images/gang/"+["Chae", "Graeme", "Keano", "Kat", "Keith", "Kieran", "Leigh-Ann", "Michael", "Neil", "Nevin", "Peter", "Sandy", "Tony", "Simon", "Val"].sample+" - "+["dead", "happy", "normal", "sad", "undead"].sample+".jpg",
+                            #:profile_image => "images/gang/"+["Chae", "Graeme", "Keano", "Kat", "Keith", "Kieran", "Leigh-Ann", "Michael", "Neil", "Nevin", "Peter", "Sandy", "Tony", "Simon", "Val"].sample+" - "+["dead", "happy", "normal", "sad", "undead"].sample+".jpg",
                             :profile_video => 'https://www.youtube.com/watch?v=kO8x8eoU3L4',
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
                             :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
                             :role => 'registered',
-                            :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample)
+                            :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample,
+                            :about_me => Faker::Lorem.paragraph(sentence_count = 5))
 
     user.profile = profile
 
@@ -88,7 +89,8 @@ namespace :db do
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
                             :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
                             :role => 'registered',
-                            :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample)
+                            :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample,
+                            :about_me => Faker::Lorem.paragraph(sentence_count = 5))
 
     user.profile = profile
 
@@ -146,7 +148,9 @@ namespace :db do
                                 :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
                                 :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,
                                 :role => 'registered',
-                                :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample)
+                                :city => ['Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Stirling'].sample,
+                                :about_me => Faker::Lorem.paragraph(sentence_count = 5))
+
 
         user.profile = profile
 

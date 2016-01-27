@@ -6,8 +6,6 @@ class ProjectsController < ApplicationController
   def index
     @user = current_user
 
-    # @projects = Project.search(params[:search])
-
     @projects = Project.all
 
      if params[:search]
@@ -16,29 +14,12 @@ class ProjectsController < ApplicationController
        @project = Project.all  #.order('created_at DESC')
      end
 
-
-
-     # if params[:search]
-     #    @pins = Pin.search(params[:search])
-     #  else  
-     #    @pins = Pin.paginate(:page => params[:page], :per_page => 50).order("created_at DESC")
-     #  end  
-
-
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @pins }
         # format.js
       end
-    # if params[:search]
-    #   @projects = Project.find(:all, :conditions => ['name LIKE ?', "%#{project_params[:search]}%"])
-    # else
-    # @projects = Project.all.where(editable: true).order("created_at DESC")
 
-    #   # @projects = Project.find(:all)
-    # end
-
-    
   end
 
   # GET /sessions/1
@@ -88,6 +69,8 @@ end
 
 
   def update
+
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -117,6 +100,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.permit(:title, :bpm, :key, :creator, :genre, :public, :editable, :description, :created_at, :published, :published_at, :preview_url, :user_id, :search)
+      params.require(:project).permit(:title, :bpm, :key, :creator, :genre, :public, :editable, :description, :created_at, :published, :published_at, :preview_url, :user_id, :search)
     end
 end
