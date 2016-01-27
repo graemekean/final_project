@@ -18,6 +18,8 @@ class StatusesController < ApplicationController
 
       @statuses = combined.sort_by(&:created_at).reverse
 
+      # @conversations = Conversation.all
+
 
 
       

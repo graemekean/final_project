@@ -44,9 +44,11 @@ class User < ActiveRecord::Base
 
   # has_many :stems
   has_many :statuses
+  
 
-  has_many :conversations, :foreign_key => :sender_id
-
+  def conversations
+    Conversation.where("conversations.sender_id = :id or conversations.recipient_id = :id", id: id)
+  end
 
 
 

@@ -12,7 +12,7 @@
       <div class="item">
         <div class="content">
           <div class="header">
-          <% if user = current_user %>
+          <% if user == current_user %>
 
           <strong>Me : </strong> <%= message.message_time %>
           <% else %>

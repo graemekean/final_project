@@ -13,11 +13,8 @@ class MessagesController < ApplicationController
       @over_ten = false
       @messages = @conversation.messages
     end
-    if @messages.last
-      if @messages.last.user_id != current_user.id
-        @messages.last.read = true;
-      end
-    end
+
+    @conversation.read_by!(current_user)
 
     @message = @conversation.messages.new
   end
@@ -27,13 +24,15 @@ class MessagesController < ApplicationController
   end
 
   def create
+
     @message = @conversation.messages.new(message_params)
+    @message.read = false
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     end
   end
 
-private
+  private
   def message_params
     params.require(:message).permit(:body, :user_id)
   end
