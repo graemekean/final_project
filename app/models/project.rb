@@ -19,6 +19,21 @@ class Project < ActiveRecord::Base
   has_many :stems, through: :memberships
   # has_many :users, through: :studio
 
+ # def self.search(search)
+ #   where("title LIKE ?", "%#{search}%") 
+ #   where("description LIKE ?", "%#{search}%")
+ #   where("genre LIKE ?", "%#{search}%")
+ # end
+
+ def self.search(search)
+     if search
+       losearch = search.downcase
+       where('lower(title) LIKE ?', "%#{search.to_s.downcase}%")
+       where('lower(description) LIKE ?', "%#{search.to_s.downcase}%")
+
+     end
+   end
+
 
 
 

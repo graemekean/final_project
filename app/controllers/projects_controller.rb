@@ -5,14 +5,38 @@ class ProjectsController < ApplicationController
   # GET /sessions.json
   def index
     @user = current_user
-    @commentable = @status
-    @comments = @commentable.comments
-    @comment = Comment.new
-    # @projects = Project.find
 
-    # @projects = Project.where(:public :true).order("created_on DESC").find(1)
+    # @projects = Project.search(params[:search])
 
-    @projects = Project.all.where(editable: true).order("created_at DESC")
+    @projects = Project.all
+
+     if params[:search]
+       @projects = Project.search(params[:search]).order("created_at DESC")
+     else
+       @project = Project.all  #.order('created_at DESC')
+     end
+
+
+
+     # if params[:search]
+     #    @pins = Pin.search(params[:search])
+     #  else  
+     #    @pins = Pin.paginate(:page => params[:page], :per_page => 50).order("created_at DESC")
+     #  end  
+
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @pins }
+        # format.js
+      end
+    # if params[:search]
+    #   @projects = Project.find(:all, :conditions => ['name LIKE ?', "%#{project_params[:search]}%"])
+    # else
+    # @projects = Project.all.where(editable: true).order("created_at DESC")
+
+    #   # @projects = Project.find(:all)
+    # end
 
     
   end
@@ -93,6 +117,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :bpm, :key, :creator, :genre, :public, :editable, :description, :created_at, :published, :published_at, :preview_url, :user_id)
+      params.permit(:title, :bpm, :key, :creator, :genre, :public, :editable, :description, :created_at, :published, :published_at, :preview_url, :user_id, :search)
     end
 end

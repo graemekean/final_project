@@ -1,39 +1,43 @@
-<div class="page-header">
-  <h1> My Friends </h1>
-</div>
-
-<h1>cycle through user friendships and return each friend</h1>
-
-<div class="col-md-12">
-
-  <% unless current_user == @user %>
-  <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
-  <% end %>
-
-  <h4>Friends</h4>
-  <ul>
-    <% @user.friends.each do |friend| %>
-    <li>
-      <%= friend.email %> 
-      <% if current_user == @user %>
-      <%= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
-    <% end %>
-    </li>
-    <% end %>
-  </ul>
-
-  <% if current_user == @user %>
-    <h4>Friend Requests</h4>
+<!-- IF THE USER HAS ADDED FRIENDS - SHOW A LIST OF THEM -->
+<% if current_user.friends.count > 0 %>
+<div class="container-fluid"> 
+  <div class="row session-full"> 
+    <h4>Friends</h4>
     <ul>
-      <% @user.requested_friendships.each do |request| %>
-      <li>
-        <%= request.email %> 
-        <%= link_to "Accept", friendship_path(:id => request), :method => "put" %> 
-        <%= link_to "Decline", friendship_path(:id => request), :method => :delete %>
-      </li>
-      <% end %>
+    <% @user.friends.each do |friend| %>
+          <div class="col-md-3 session-full">
+
+          <% if friend.profile.profile_image? %>
+          <%#= link_to status.user.profile.profile_name, profile_path(status.user) %>
+            <%#= link_to image_tag(@profile.profile_image.thumb.url, class: "img-responsive"), @profile.profile_image.large.url %> 
+            <%= link_to image_tag(friend.profile.profile_image.thumb.url, class: "img-responsive"), profile_path(friend) %> 
+
+          <% else %>
+            <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), profile_path(friend) %> 
+          <% end %>
+            
+              <p><%= friend.profile.profile_name %> </p>
+              <p><%= friend.profile.primary_discipline %></p>
+              <p><%= friend.profile.city %></p>
+              <%= friend.profile_name %> 
+              <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: friend.id), method: 'post', :class => "btn btn-primary"%>
+
+              
+              
+
+              <% if current_user == @user %>
+              <%#= link_to "Remove", friendship_path(:id => friend), :method => :delete %>
+              <% end %>
+            
+        </div>
+
+        <% end %>
     </ul>
-  <% end %>
+  </div>
 </div>
+<% end %>
+
+
+
 
 

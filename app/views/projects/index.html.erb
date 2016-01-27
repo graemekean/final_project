@@ -4,8 +4,18 @@
 <div class="page-header">
   <h1>All of all the projects in the system</h1> 
   <%= link_to 'New Project', new_project_path %>
-
 </div>
+
+
+<%= form_tag(projects_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Projects" %>
+<%= submit_tag "Search" %>
+<% end %>
+
+
+<% if @projects.present? %>
+
+
 
 <% @projects.each do |project| %>
 <div class="session-full">
@@ -39,8 +49,10 @@
   <!-- <p><%#= session.user %> -->
 </div>
 <% end %>
+<% else %>
+  <p>There are no projects containing the term(s) <%= params[:search] %>.</p>
+<% end %>
 
 
-<br>
 
 

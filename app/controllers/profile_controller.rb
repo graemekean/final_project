@@ -10,6 +10,12 @@ class ProfileController < ApplicationController
    # @user = current_user
    @profiles = Profile.all
 
+   if params[:search]
+     @profiles = Profile.search(params[:search]).order("created_at DESC")
+   else
+     @profiles = Profile.all  #.order('created_at DESC')
+   end
+
  end
 
  def show
@@ -134,7 +140,7 @@ class ProfileController < ApplicationController
    # end
 
    def profile_params
-    params.require(:profile).permit(:user_id, :name, :email, :password, :first_name, :last_name, :profile_name, :city, :password_confirmation, :youtube_url, :linkedin_url, :role, :profile_image, :profile_video, :about_me, :primary_discipline, :twitter_feed, :soundcloud_url, :featured_track)
+    params.require(:profile).permit(:user_id, :name, :email, :password, :first_name, :last_name, :profile_name, :city, :password_confirmation, :youtube_url, :linkedin_url, :role, :profile_image, :profile_video, :about_me, :primary_discipline, :twitter_feed, :soundcloud_url, :featured_track, :search)
     end
 
 

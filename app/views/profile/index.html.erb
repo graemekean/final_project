@@ -1,32 +1,46 @@
 <!-- <p id="notice"><%#= notice %></p> -->
 
 
-<div class="page-header">
-  <h1>All Profiles</h1>
-  <%= link_to "New Profile", new_profile_path %> | 
-
-</div>
-
-
-<% @profiles.each do |profile| %>
 <div class="session-full">
-  <% @user = profile.user %>
-  <br>
-  <ul>
-    <li><strong><%= profile.first_name %></strong></li>
-    <li><p>Name: <%= profile.last_name %></p></li>
-    <li><p><%= profile.about_me %></p></li>
+  <h1>All Profiles</h1>
 
-    <%#= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> 
+  <%= form_tag(profile_index_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Profiles" %>
+  <%= submit_tag "Search" %>
+  <% end %>
 
-    <li><span>
-      <%= link_to "Show", profile %>
-    </span> </li>
-  </ul>
-  <br>
-
-
+  <%#= link_to "New Profile", new_profile_path %> 
 </div>
+
+
+
+<% if @profiles.present? %>
+  <div class="container-fluid">  
+
+  <% @profiles.each do |profile| %>
+  <% @user = profile.user %>
+    <div class="row session-full">
+      <div class="col-md-2">
+        <% if @user.profile.profile_image? %>
+          <%= link_to image_tag(@user.profile.profile_image.thumb.url, class: "img-responsive"), profile_path(@user) %> 
+        <% else %>
+          <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), profile_path(@user) %> 
+        <% end %>
+      </div>
+
+      <div class="col-md-10"> 
+        <strong><%= profile.first_name %></strong>
+        <p>Name: <%= profile.last_name %></p>
+        <p><%= profile.about_me %></p>
+        <p><%= link_to "Show", profile %></p>
+        <%#= link_to time_ago_in_words(profile.created_at) + " ago", profile_path(@user) %> 
+      </div>
+    </div>
 <% end %>
+
+<% else %>
+<p>There are no profiles containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+</div>
 
 

@@ -14,4 +14,22 @@ class Profile < ActiveRecord::Base
 
   mount_uploader :profile_image, ImageUploader
 
+
+  def self.search(search)
+      if search
+        losearch = search.downcase
+        # where('game_name LIKE :search OR genre LIKE :search OR console LIKE :search', search: "%#{search}%")
+
+        where('lower(first_name) LIKE :search OR lower(genres) LIKE :search OR lower(primary_discipline) LIKE :search OR lower(last_name) LIKE :search OR lower(profile_name) LIKE :search OR lower(city) LIKE :search', search: "%#{search.to_s.downcase}%")
+
+
+
+        # where('lower(first_name) LIKE ?', "%#{search.to_s.downcase}%")
+        # where('lower(primary_discipline) LIKE ?', "%#{search.to_s.downcase}%")
+
+
+
+      end
+    end
+
 end

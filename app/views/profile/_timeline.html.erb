@@ -39,32 +39,41 @@
 
 
 
-<% if status.comments.count > 0 %>
+<%# if status.comments.count > 0 %>
         <div class="col-md-12">
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="heading<%= @text.to_s %>">
                 <h4 class="panel-title">
                   <a class="<%= collapse %>" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= @text.to_s %>" aria-expanded="true" aria-controls="collapse<%= @text.to_s %>">
-                    <h5><%= status.comments.count %> Comments. </h5>
+                    <span><h5><%= status.comments.count %> Comments. </h5><h4><%= link_to "New Comment", [:new, status, :comment] %></h4></span>
+
                   </a>
                 </h4>
               </div>
               <div id="collapse<%= @text.to_s %>" class="panel-collapse collapse <% property %>" role="tabpanel" aria-labelledby="heading<%= @text.to_s %>">
                 <div class="panel-body">
+                <% @commentable = @status %>
                 <% status.comments.each do |comment| %>
-                <div class="session-full">
-                <% @commenter = User.find(comment.user_id) %>
-                  <h5><%= @commenter.profile.profile_name %></h5>
-                  <p><%= comment.content %></p>
-                  <p><%= "created " + time_ago_in_words(comment.created_at) + " ago" %> </p> 
+                <div class="col-md-12 session-full">
+                  <div class="col-md-2">
+                      <% commenter = User.find(comment.user_id) %>
+                    <% if commenter.profile.profile_image? %>
+                      <%= link_to image_tag(commenter.profile.profile_image.thumb.url, class: "img-responsive"), commenter.profile.profile_image.large.url %> 
+                    <% else %>
+                      <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), "/images/profiles/user-thumb.png" %> 
+                    <% end %>
+                  </div>
+                  <div class="col-md-10">
+                        <h5><%= commenter.profile.profile_name %></h5>
+                        <p><%= comment.content %></p>
+                        <p><%= "created " + time_ago_in_words(comment.created_at) + " ago" %> </p> 
+                  </div>
+             
+                  <!-- <p><%#= link_to "New Comment", [:new, status, :comment] %></p> -->
+                  <!-- <p><%#= link_to "Add Comment", new_status_comment_path(status) %></p> -->
 
-                  <%# if @commenter.profile.profile_image? %>
-                    <%#= link_to image_tag(@commenter.profile_image.thumb.url, class: "img-responsive"), @commenter.profile.profile_image.large.url %> 
-                  <%# else %>
-                    <%#= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), "/images/profiles/user-thumb.png" %> 
-                  <%# end %>
-
+                <%#= render 'comments/form' %>
 
                   <br>
                   </div>
@@ -74,7 +83,7 @@
             </div>
           </div>
         </div>
-<% end %>
+<%# end %>
 
 
 

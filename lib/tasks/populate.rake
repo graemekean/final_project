@@ -15,6 +15,8 @@ namespace :db do
 
     #SET UP THE MAIN ADMIN USER PROFILE FOR THE SITE
 
+
+
     user = User.create!(:email => '1@1.com',
       :password => "password")
 
@@ -26,7 +28,7 @@ namespace :db do
                             :youtube_url => 'https://www.youtube.com/channel/UCKFNAIWotHMt99SrErdP62Q',
                             :soundcloud_url => 'soundcloud.com',
                             :linkedin_url => 'linked_in.com',
-                            #:profile_image => '',
+                            :profile_image => "images/gang/"+["Chae", "Graeme", "Keano", "Kat", "Keith", "Kieran", "Leigh-Ann", "Michael", "Neil", "Nevin", "Peter", "Sandy", "Tony", "Simon", "Val"].sample+" - "+["dead", "happy", "normal", "sad", "undead"].sample+".jpg",
                             :profile_video => 'https://www.youtube.com/watch?v=kO8x8eoU3L4',
                             :genres => ['rock', 'pop', 'folk', 'acoustic', 'emo', 'dubstep', 'metal', 'progressive', 'jazz', 'rap', 'hip-hop', 'RnB', 'techno', 'funk', 'disco', 'dance'].sample,
                             :influences => ['The Beatles', 'The Rolling Stones', 'David Bowie', 'The Gorillaz', 'The Killers', 'Katy Perry', 'Blondie', 'Elton John', 'Lady Gaga', 'Amy Winehouse', 'Mark Ronson' ].sample,

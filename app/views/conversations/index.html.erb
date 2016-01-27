@@ -1,10 +1,13 @@
 <div class="page-header">
-  <h3>Conversations</h3>
+  <h3>Messenger</h3>
 </div>
+
+<div class="container-fluid"> 
+  <div class="row session-full"> 
 
   <% @conversations.each do |conversation| %>
 
-    <div class="session-full">
+    
 
     <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
       <% if conversation.sender_id == current_user.id %>
@@ -12,22 +15,26 @@
       <% else %>
       <% recipient = User.find(conversation.sender_id) %>
       <% end %>
-    <%= link_to recipient.profile.first_name, conversation_messages_path(conversation)%>
+
+      <div class="col-md-2">
+        <% if recipient.profile.profile_image? %>
+        <%#= link_to status.user.profile.profile_name, profile_path(status.user) %>
+          <%#= link_to image_tag(@profile.profile_image.thumb.url, class: "img-responsive"), @profile.profile_image.large.url %> 
+        <%= link_to image_tag(recipient.profile.profile_image.thumb.url, class: "img-responsive"), profile_path(recipient) %> 
+        <% else %>
+          <%= link_to image_tag("profiles/user-thumb.png", class: "img-responsive"), conversation_messages_path(conversation) %> 
+        <% end %>
+      </div>
+      <div class="col-md-10"> 
+          <h5><%= link_to recipient.profile.first_name, conversation_messages_path(conversation)%></h5>
+          <h4>Last Message in this conversation</h4>
+          <p><em><%= conversation.messages.last.user.profile.profile_name %> : </em><strong><%= conversation.messages.last.body %></strong></p>
+          <br>
+          <h5><%= link_to "Show coversation", conversation_messages_path(conversation)%></h5>
+
+      </div>
     <% end %>
   <% end %>
-  </div>
-
-
-
-<div class="ui segment">
-  <h3>All Users</h3>
-  <div class="ui list">
-    <% @users.each do |user| %>
-    <% if user.id != current_user.id %>
-    <div class="item">
-      <%= user.profile.profile_name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
-    </div>
-    <% end %>
-    <% end %>
-  </div>
 </div>
+
+

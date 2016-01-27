@@ -1,28 +1,25 @@
 
 
-<div class="container edit_user">
-  <div class="col-md-6 col-md-offset-3">
+<div class="row">
+  <div class="col-md-4">
 
-    <% provide(:title, "Edit Group") %>
-    <h1>Edit Group</h1>
-
-
-    <%= simple_form_for(@group) do |f| %>
-    <%#= render 'shared/error_messages' %>
-    <div class="col-md-6">
-
-      <%= f.input :title %>
-      <br>
-      <%= f.input :description %>
-      <br>
+    <%= simple_form_for(@group, html: {class: "well"}) do |f| %>
+      <fieldset>
+        <!-- <legend></legend> -->
+        <%#= render 'shared/error_messages' %>
+          <div class="field">
+              <%= f.input :title %>
+          </div>
+          <div class="field">
+              <%= f.input :description %>
+          </div>
       
-      <%= f.hidden_field :creator, :value => current_user.profile.profile_name %> 
-     
+          <%= f.hidden_field :creator, :value => current_user.profile.profile_name %> 
+          <div class="actions">
+          <%= f.submit "Save changes", class: "btn btn-primary" %>
+          </div>
 
-    </div>
-
-
-    <%= f.submit "Save changes", class: "btn btn-primary" %>
+    </fieldset>
     <% end %>
 
 
